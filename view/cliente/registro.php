@@ -132,34 +132,40 @@
                                             </div>
 
                                             <!-- Fecha nacimiento -->
-                                            <div class="fv-row mb-5 col-md-4 pe-0">
-                                                <label class="mb-2">Día</label>
-                                                <input type="number" placeholder = "Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
-                                            </div>
-                                            
-                                            <div class="fv-row mb-5 col-md-4 pe-0">
-                                                <label class="mb-2">Mes</label>
-                                                <select id="BirthDateMonth" class="form-select bg-transparent" data-control="select2" data-placeholder="Mes" data-hide-search="false" name="BirthDateMonth">
-                                                    <option value=""></option>
-                                                    <option value="1">Enero</option>
-                                                    <option value="2">Febrero</option>
-                                                    <option value="3">Marzo</option>
-                                                    <option value="4">Abril</option>
-                                                    <option value="5">Mayo</option>
-                                                    <option value="6">Junio</option>
-                                                    <option value="7">Julio</option>
-                                                    <option value="8">Agosto</option>
-                                                    <option value="9">Septiembre</option>
-                                                    <option value="10">Octubre</option>
-                                                    <option value="11">Noviembre</option>
-                                                    <option value="12">Diciembre</option>
-                                                </select>
+                                            <div class="fv-row mb-5 col-md-12">
+                                                <label class="mb-3 fw-bold d-block">Fecha de Nacimiento</label>
+                                                <div class="row gx-3">
+                                                    <div class="fv-row mb-5 col-md-4">
+                                                        <label class="mb-2">Día</label>
+                                                        <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
+                                                    </div>
+                                                    
+                                                    <div class="fv-row mb-5 col-md-4">
+                                                        <label class="mb-2">Mes</label>
+                                                        <select id="BirthDateMonth" class="form-select bg-transparent" data-control="select2" data-placeholder="Mes" data-hide-search="false" name="BirthDateMonth">
+                                                            <option value=""></option>
+                                                            <option value="1">Enero</option>
+                                                            <option value="2">Febrero</option>
+                                                            <option value="3">Marzo</option>
+                                                            <option value="4">Abril</option>
+                                                            <option value="5">Mayo</option>
+                                                            <option value="6">Junio</option>
+                                                            <option value="7">Julio</option>
+                                                            <option value="8">Agosto</option>
+                                                            <option value="9">Septiembre</option>
+                                                            <option value="10">Octubre</option>
+                                                            <option value="11">Noviembre</option>
+                                                            <option value="12">Diciembre</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="fv-row mb-5 col-md-4">
+                                                        <label class="mb-2">Año</label>
+                                                        <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="fv-row mb-5 col-md-4 pe-0">
-                                                <label class="mb-2">Año</label>
-                                                <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
-                                            </div>
 
                                             <!-- Email -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">

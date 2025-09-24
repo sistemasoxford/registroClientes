@@ -1,0 +1,13 @@
+# Ignorar dependencias de Composer
+vendor/
+
+# Ignorar archivo de configuración de entorno
+.env
+
+# Ignorar directorios específicos dentro de public/, pero mantener .gitkeep
+config/config.php
+
+public/images/*
+!public/images/.gitkeep
+
+historial_resultados.json

@@ -1,9 +1,17 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $('#clienteForm').on('submit', function(e) {
-        e.preventDefault(); // Evita el envío normal del formulario
+    // Restringir a solo números el input de documento
+    $('#PassportNumber, #CellularPhoneNumber').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, ''); 
+    });
 
-        // Construir un objeto JSON a partir del formulario
+    $('#FirstName, #LastName').on('input', function () {
+    this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+    });
+
+    $('#clienteForm').on('submit', function (e) {
+        e.preventDefault();
+
         var formData = {
             tDocumento: $('#tDocumento').val(),
             PassportNumber: $('input[name="PassportNumber"]').val(),
@@ -11,17 +19,16 @@ $(document).ready(function() {
             LastName: $('input[name="LastName"]').val(),
             Sex: $('#Sex').val(),
             BirthDateDay: $('input[name="BirthDateDay"]').val(),
-            BirthDateMonth: $('#BirthDateMonth').val(),
+            BirthDateMonth: $('input[name="BirthDateMonth"]').val(),
             BirthDateYear: $('input[name="BirthDateYear"]').val(),
             Email: $('input[name="Email"]').val(),
             CellularPhoneNumber: $('input[name="CellularPhoneNumber"]').val(),
             RegionId: $('#RegionId').val(),
             City: $('#City').val(),
-            CityText: $('#City option:selected').text(), // 👈 texto visible
+            CityText: $('#City option:selected').text(),
             TermsAccepted: $('input[name="TextValue"]').is(':checked') ? 1 : 0
         };
 
-        // Mostrar el SweetAlert de carga
         Swal.fire({
             title: "Cargando...",
             text: "Por favor, espere mientras procesamos su solicitud.",
@@ -34,21 +41,20 @@ $(document).ready(function() {
         });
 
         $.ajax({
-            url: urlEnviar, // Cambia esto por tu archivo PHP
+            url: urlEnviar,
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(formData),
-            beforeSend: function() {
-                // Aquí puedes deshabilitar el botón y mostrar un loader
+            beforeSend: function () {
                 $('#kt_sign_up_submit').attr('disabled', true);
             },
-            success: function(response) {
-                if(response.success){
+            success: function (response) {
+                if (response.success) {
                     Swal.fire({
                         text: response.message,
                         icon: "success",
-                        timer: 2000, // 2 segundos
+                        timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
                         window.location.href = urlOtp;
@@ -63,7 +69,7 @@ $(document).ready(function() {
                     });
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
                 Swal.fire({
                     title: "Error",
@@ -72,7 +78,6 @@ $(document).ready(function() {
                 });
             }
         });
-
     });
 
 });

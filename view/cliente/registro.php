@@ -107,19 +107,19 @@
                                             <!-- Documento -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Documento</label>
-                                                <input type="text" name="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>"/>
+                                                <input type="text" name="PassportNumber" id="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>" />
                                             </div>
 
                                             <!-- Nombre -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Primer Nombre</label>
-                                                <input type="text" name="FirstName" autocomplete="off" class="form-control bg-transparent" value=""/>
+                                                <input type="text" name="FirstName" id="FirstName" autocomplete="off" class="form-control bg-transparent" value=""/>
                                             </div>
 
                                             <!-- Apellido -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Primer Apellido</label>
-                                                <input type="text" name="LastName" autocomplete="off" class="form-control bg-transparent" value=""/>
+                                                <input type="text" name="LastName" id="LastName" autocomplete="off" class="form-control bg-transparent" value=""/>
                                             </div>
 
                                             <!-- Sexo -->
@@ -175,7 +175,7 @@
                                             <!-- Celular -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required" required>Celular</label>
-                                                <input type="text" name="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value=""/>
+                                                <input type="text" name="CellularPhoneNumber" id="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value=""/>
                                             </div>
 
                                             <!-- Departamento -->

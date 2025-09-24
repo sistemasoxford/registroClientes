@@ -16,7 +16,7 @@ class ControlCliente {
     }
 
     function registrarCliente(){
-        $tDocumento = $this->objCliente->getTDocumento();
+        $tDocumento = $_SESSION['cliente']['tDocumento'];
         $documentoOriginal = $this->objCliente->getDocumento();
         $documento = $_SESSION['cliente']['documento'];
         $nombres = $_SESSION['cliente']['nombres'];

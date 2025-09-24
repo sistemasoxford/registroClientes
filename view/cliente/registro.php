@@ -96,10 +96,10 @@
                                                 <label class="mb-2 required">Tipo de Documento</label>
                                                 <select id="tDocumento" class="form-select bg-transparent" data-control="select2" data-placeholder="Seleccione el tipo de documento" data-hide-search="false" name="tDocumento">
                                                     <option value=""></option>
-                                                    <option value="cc">Cédula de Ciudadanía</option>
-                                                    <option value="ce">Cédula de Extranjería</option>
-                                                    <option value="nit">NIT</option>
-                                                    <option value="p">Pasaporte</option>
+                                                    <option value="CC">Cédula de Ciudadanía</option>
+                                                    <option value="CE">Cédula de Extranjería</option>
+                                                    <option value="NIT">NIT</option>
+                                                    <option value="P">Pasaporte</option>
                                                     <option value="TI">Tarjeta de Identidad</option>
                                                 </select>
                                             </div>
@@ -205,9 +205,9 @@
                                             </div>
 
                                             <div class="fv-row mb-8 col-md-12 pe-0">
-                                                    <span class="text-start fw-semibold text-gray-700 fs-base">
-                                                        Al dar clic en siguiente se te enviara un código a tu número de celular, el cual debes ingresar en la siguiente pantalla para validar tu identidad.
-                                                    </span>
+                                                <span class="text-start fw-semibold text-gray-700 fs-base">
+                                                    Al dar clic en siguiente se te enviara un código a tu número de celular, el cual debes ingresar en la siguiente pantalla para validar tu identidad.
+                                                </span>
                                             </div>
 
                                             <!-- Botón -->

@@ -44,7 +44,7 @@ class ControlCliente {
             if($recordSet > 0){
                 return ["success" => true, "message" => "Usuario creado con exito."];
             }else{
-                return ["success" => false, "message" => "Error al subir el archivo. Por favor, intente de nuevo con otro tipo de archivo."];
+                return ["success" => false, "message" => "Error al crear el usuario. Por favor, intente de nuevo."];
             }
 
         }catch(Exception $e){

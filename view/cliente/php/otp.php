@@ -23,7 +23,11 @@ try {
         if($verificacion['success']) {
             $objControlCliente = new ControlCliente($objCliente, $objOtp);
             $registrar = $objControlCliente->registrarCliente();
-            if($registrar['success']) {
+
+            $objControlCustomer = new ControlCustomer();
+            $registrarCegid = $objControlCustomer->addNewCustomer();
+
+            if($registrar['success'] && $registrarCegid['success']) {
                 // Eliminar la variable de sesión del cliente
                 unset($_SESSION['cliente']);
                 unset($_SESSION['usuario']);
@@ -31,6 +35,11 @@ try {
                 echo json_encode([
                     "success" => $verificacion['success'],
                     "message" => $verificacion['message']
+                ]);
+            }else{
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Error al registrar el cliente" 
                 ]);
             }
             

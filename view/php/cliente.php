@@ -2,6 +2,12 @@
 
 require_once 'config/config.php'; 
 require_once BASE_PATH . 'config/autoload.php';
+require_once BASE_PATH . 'config/env.php';
+
+loadEnv();
+
+$login = $_ENV['SOAP_USER'] ?? '';
+$pass = $_ENV['SOAP_PASS'] ?? '';
 
 $documento = $_POST['PassportNumber'] ?? null;
 
@@ -25,8 +31,8 @@ $options = [
     "trace" => 1,
     "exceptions" => true,
     "cache_wsdl" => WSDL_CACHE_NONE,
-    'login' => 'Y2_C4_PROD\\administrativo',
-    'password' => 'ab.2024**'
+    'login' => $_ENV['SOAP_USER'] ?? '',
+    'password' => $_ENV['SOAP_PASS'] ?? ''
 ];
 
 try {
@@ -35,7 +41,7 @@ try {
     $params = [
         "searchData" => [
             "PassportNumber" => $documento,
-            "MaxNumberOfCustomers" => 5
+            "MaxNumberOfCustomers" => 1
         ],
         "clientContext" => [
             "DatabaseId" => "Y2_C4_PROD"

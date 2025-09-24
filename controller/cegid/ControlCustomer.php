@@ -26,13 +26,13 @@ class ControlCustomer {
     /**
      * Construye los parámetros para el servicio AddNewCustomer
      */
-    private function buildParams(array $data) {
+    private function buildParams() {
         return [
             'customerData' => [
                 'FirstName'      => $_SESSION['cliente']['nombres'] ?? '',
                 'LastName'       => $_SESSION['cliente']['apellidos'] ?? '',
                 'IsCompany'      => false,
-                'PassportNumber' => $_SESSION['cliente']['documento'] ?? '',
+                'PassportNumber' => $_SESSION['cliente']['tDocumento'] . ";" . $_SESSION['cliente']['documento'] ?? '',
                 'LanguageId'     => 'ESP',
                 'NationalityId'  => 'COL',
                 'Sex'            => $_SESSION['cliente']['sexo'] ?? '',
@@ -64,7 +64,7 @@ class ControlCustomer {
                     'UserField' => [
                         [
                             'Id'        => 1,
-                            'TextValue' => $_SESSION['cliente']['terminos'] ?? '',
+                            'TextValue' => 'S',
                             'ValueType' => 'TextValueKind'
                         ]
                     ]
@@ -81,9 +81,9 @@ class ControlCustomer {
     /**
      * Llama al servicio SOAP AddNewCustomer
      */
-    public function addNewCustomer(array $data) {
+    public function addNewCustomer() {
         try {
-            $params = $this->buildParams($data);
+            $params = $this->buildParams();
             $response = $this->client->__soapCall('AddNewCustomer', [$params]);
 
             return [

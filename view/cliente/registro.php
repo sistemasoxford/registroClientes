@@ -166,7 +166,6 @@
                                                 </div>
                                             </div>
 
-
                                             <!-- Email -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Correo</label>

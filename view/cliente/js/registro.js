@@ -19,7 +19,7 @@ $(document).ready(function () {
             LastName: $('input[name="LastName"]').val(),
             Sex: $('#Sex').val(),
             BirthDateDay: $('input[name="BirthDateDay"]').val(),
-            BirthDateMonth: $('input[name="BirthDateMonth"]').val(),
+            BirthDateMonth: $('#BirthDateMonth').val(),
             BirthDateYear: $('input[name="BirthDateYear"]').val(),
             Email: $('input[name="Email"]').val(),
             CellularPhoneNumber: $('input[name="CellularPhoneNumber"]').val(),

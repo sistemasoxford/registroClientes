@@ -88,11 +88,16 @@
                                     <div class="w-lg-500px p-10">
                                         <!--begin::Form-->
                                         <form class="form w-100 row" id="clienteForm">
-                                            <div class="text-center mb-11 pe-0">
+
+                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-20 mb-3">
+                                                <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
+                                            </div>
+
+                                            <!-- <div class="text-center mb-11 pe-0">
                                                 <h1 class="text-dark mb-3" style="color: #000000 !important;font-family: Poppins;">
                                                     Registro de Cliente
                                                 </h1>
-                                            </div>
+                                            </div> -->
 
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Tipo de Documento</label>
@@ -222,9 +227,7 @@
                                                 </button>
                                             </div>
 
-                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0">
-                                              <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="h-90px h-lg-75px">
-                                            </div>
+                                            
                                         </form>
                                         <!--end::Form-->
                                     </div>

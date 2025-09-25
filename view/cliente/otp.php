@@ -83,33 +83,42 @@
                                   <!--begin::Wrapper-->
                                   <div class="w-lg-500px p-10">
                                       <!--begin::Form-->
-                                      <form class="form w-100 row" id="clienteForm">
-                                          <div class="text-center mb-11 pe-0">
-                                              <h1 class="text-dark mb-3" style="color: #000000 !important;font-family: Poppins;">
-                                                  Registro de Cliente
-                                              </h1>
-                                          </div>
+                                        <form class="form w-100 row" id="clienteForm">
+                                            <div class="text-center mb-11 pe-0">
+                                                <h1 class="text-dark mb-3" style="color: #000000 !important;font-family: Poppins;">
+                                                    Registro de Cliente
+                                                </h1>
+                                            </div>
 
-                                          <!-- Documento -->
-                                          <div class="fv-row mb-5 col-md-12 pe-0">
-                                              <label class="mb-2">OTP</label>
-                                              <input type="text" id="otp" name="otp" autocomplete="off" class="form-control bg-transparent" />
-                                          </div>
+                                            <!-- Documento -->
+                                            <div class="fv-row mb-5 col-md-12 pe-0">
+                                                <label class="mb-2">OTP</label>
+                                                <input type="text" id="otp" name="otp" autocomplete="off" class="form-control bg-transparent" />
+                                            </div>
 
-                                          <!-- Botón -->
-                                          <div class="d-grid mb-5 pe-0">
-                                              <button type="submit" id="kt_sign_up_submit" class="btn btn-dark" style="background-color: #000000;">
-                                                  <span class="indicator-label">Enviar</span>
-                                                  <span class="indicator-progress">Por favor espere...
-                                                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                                  </span>
-                                              </button>
-                                          </div>
+                                            <div class="fv-row mb-8 col-md-12 pe-0">
+                                                <span class="text-start fw-semibold text-gray-700 fs-base">
+                                                    ¿No recibiste tu código? 
+                                                    <a href="#" id="reenviarOtp" class="link-primary disabled" style="pointer-events: none; opacity: 0.6;">
+                                                        Reenviar OTP en <span id="contador">05:00</span>
+                                                    </a>
+                                                </span>
+                                            </div>
 
-                                          <div class="text-gray-500 text-center fw-semibold fs-6 pe-0">
-                                              <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="h-90px h-lg-75px">
-                                          </div>
-                                      </form>
+                                            <!-- Botón -->
+                                            <div class="d-grid mb-5 pe-0">
+                                                <button type="submit" id="kt_sign_up_submit" class="btn btn-dark" style="background-color: #000000;">
+                                                    <span class="indicator-label">Enviar</span>
+                                                    <span class="indicator-progress">Por favor espere...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>
+                                                </button>
+                                            </div>
+
+                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0">
+                                                <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="h-90px h-lg-75px">
+                                            </div>
+                                        </form>
                                       <!--end::Form-->
                                   </div>
                                   <!--end::Wrapper-->
@@ -152,9 +161,11 @@
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="<?php echo BASE_URL; ?>view/cliente/js/otp.js"></script>
+    <script src="<?php echo BASE_URL; ?>view/cliente/js/contadorOtp.js"></script>
     <!--end::Custom Javascript-->
     <script>
         let urlOtp = "<?php echo BASE_URL; ?>cliente/php/otp";
+        let urlReenviarOtp = "<?php echo BASE_URL; ?>cliente/php/reenviarOtp";
         let urlEliminarSesion = "<?php echo BASE_URL; ?>";
         let urlRegistrar = "<?php echo BASE_URL; ?>cliente/registro";
     </script>

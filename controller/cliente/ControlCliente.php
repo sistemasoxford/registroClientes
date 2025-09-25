@@ -94,6 +94,7 @@ class ControlCliente {
 
         // Datos a guardar
         $datos = [
+            'customerId'      => $_SESSION['usuario']['CustomerId'] ?? null,
             'tDocumento'    =>  $this->objCliente->getTDocumento(),
             'documento'       => $this->objCliente->getDocumento(),
             'nombres'         => $this->objCliente->getNombre(),

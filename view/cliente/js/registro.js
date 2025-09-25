@@ -40,6 +40,12 @@ $(document).ready(function () {
             },
         });
 
+        if(registrar != 1){
+            urlEnviar = urlActualizar;
+        }else{
+            urlEnviar = urlRegistrar;
+        }
+
         $.ajax({
             url: urlEnviar,
             type: 'POST',

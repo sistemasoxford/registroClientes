@@ -109,7 +109,7 @@ class ControlOtp {
         $querySelect = new QuerySelect();
         $comandoSql = $querySelect->select("otp")
                                   ->from("habeas_data")
-                                  ->where("id = '$documento' AND otp = '$otp'");
+                                  ->where("id = '$documento' AND otp = '$otp' AND created_at >= NOW() - INTERVAL 2 MINUTE");
 
         try{
             $this->objControlConexion->abrirBd();

@@ -1,0 +1,110 @@
+<?php
+require_once BASE_PATH . '/config/config.php';
+require_once BASE_PATH . '/config/env.php';
+
+loadEnv();
+
+class ControlCustomerUpdate
+{
+    private $client;
+    private $wsdl;
+    private $options;
+
+    function __construct()
+    {
+        $this->wsdl = "http://200.41.6.86/Y2_PROD/CustomerWcfService.svc?wsdl";
+
+        $this->options = [
+            'trace' => 1,
+            'exceptions' => true,
+            'cache_wsdl' => WSDL_CACHE_NONE,
+            'login' => $_ENV['SOAP_USER'] ?? '',
+            'password' => $_ENV['SOAP_PASS'] ?? ''
+        ];
+
+        $this->client = new SoapClient($this->wsdl, $this->options);
+    }
+
+    /**
+     * Construye los parámetros para el servicio AddNewCustomer
+     */
+    private function buildParams()
+    {
+        return [
+
+            'customerId' => $_SESSION['cliente']['customerId'] ?? null,
+
+            'modifiedData' => [
+                'FirstName' => $_SESSION['cliente']['nombres'] ?? '',
+                'LastName' => $_SESSION['cliente']['apellidos'] ?? '',
+                'IsCompany' => false,
+                'PassportNumber' => $_SESSION['cliente']['tDocumento'] . ";" . $_SESSION['cliente']['documento'] ?? '',
+                'LanguageId' => 'ESP',
+                'NationalityId' => 'COL',
+                'Sex' => $_SESSION['cliente']['sexo'] ?? '',
+
+                'BirthDateData' => [
+                    'BirthDateDay' => $_SESSION['cliente']['diaNacimiento'] ?? null,
+                    'BirthDateMonth' => $_SESSION['cliente']['mesNacimiento'] ?? null,
+                    'BirthDateYear' => $_SESSION['cliente']['anioNacimiento'] ?? null
+                ],
+
+                'EmailData' => [
+                    'Email' => $_SESSION['cliente']['email'] ?? '',
+                    'EmailingAccepted' => true
+                ],
+                'PhoneData' => [
+                    'CellularPhoneNumber' => $_SESSION['cliente']['telefono'] ?? ''
+                ],
+                'AddressData' => [
+                    'AddressLine1' => $_SESSION['cliente']['direccion'] ?? '',
+                    'City' => $_SESSION['cliente']['direccion'] ?? '',
+                    'ZipCode' => $_SESSION['cliente']['ciudad'] ?? '',
+                    'CountryId' => 'COL',
+                    'CountryIdType' => 'ISO3',
+                    'RegionId' => $_SESSION['cliente']['region'] ?? ''
+                ],
+                'UsualStoreId' => '1293',
+
+                'UserFields' => [
+                    'UserField' => [
+                        [
+                            'Id' => 1,
+                            'TextValue' => 'S',
+                            'ValueType' => 'TextValueKind'
+                        ]
+                    ]
+                ],
+
+                'LongDescription' => 'Ingresado desde la web'
+            ],
+            'clientContext' => [
+                'DatabaseId' => 'Y2_C4_PROD'
+            ]
+
+        ];
+    }
+
+    /**
+     * Llama al servicio SOAP AddNewCustomer
+     */
+    public function updateCustomer()
+    {
+        try {
+            $params = $this->buildParams();
+            $response = $this->client->__soapCall('UpdateCustomer', [$params]);
+
+            return [
+                "success" => true,
+                "response" => $response
+            ];
+        } catch (Exception $e) {
+            return [
+                "success" => false,
+                "error" => $e->getMessage(),
+                "request" => $this->client->__getLastRequest(),
+                "response" => $this->client->__getLastResponse()
+            ];
+        }
+    }
+}

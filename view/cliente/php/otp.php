@@ -24,13 +24,19 @@ try {
             $objControlCliente = new ControlCliente($objCliente, $objOtp);
             $registrar = $objControlCliente->registrarCliente();
 
-            $objControlCustomer = new ControlCustomer();
-            $registrarCegid = $objControlCustomer->addNewCustomer();
+            if($_SESSION['urlOtp'] != 1){
+                $objControlCustomerUpdate = new ControlCustomerUpdate();
+                $registrarCegid = $objControlCustomerUpdate->updateCustomer();
+            }else{
+                $objControlCustomer = new ControlCustomer();
+                $registrarCegid = $objControlCustomer->addNewCustomer();
+            }
 
             if($registrar['success'] && $registrarCegid['success']) {
                 // Eliminar la variable de sesión del cliente
                 unset($_SESSION['cliente']);
                 unset($_SESSION['usuario']);
+                unset($_SESSION['urlOtp']);
                 // session_destroy(); // Destruir toda la sesión si no se necesita para otros propósitos
                 echo json_encode([
                     "success" => $verificacion['success'],
@@ -39,7 +45,7 @@ try {
             }else{
                 echo json_encode([
                     "success" => false,
-                    "message" => "Error al registrar el cliente" 
+                    "message" => "Error al registrar el cliente"
                 ]);
             }
             

@@ -9,6 +9,8 @@
         header('Location: ' . BASE_URL);
         exit;
     }
+
+    $_SESSION['urlOtp'] = 0;
 ?>
 
 <!DOCTYPE html>
@@ -111,14 +113,14 @@
                                             </div>
 
                                             <!-- Nombre -->
-                                            <div class="fv-row mb-5 col-md-12 pe-0">
-                                                <label class="mb-2 required">Nombres</label>
+                                            <div class="fv-row mb-5 col-md-6 pe-0">
+                                                <label class="mb-2 required">Primer Nombre</label>
                                                 <input type="text" name="FirstName" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["FirstName"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Apellido -->
-                                            <div class="fv-row mb-5 col-md-12 pe-0">
-                                                <label class="mb-2 required">Apellidos</label>
+                                            <div class="fv-row mb-5 col-md-6 pe-0">
+                                                <label class="mb-2 required">Primer Apellido</label>
                                                 <input type="text" name="LastName" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["LastName"] ?? null; ?>"/>
                                             </div>
 
@@ -137,31 +139,31 @@
                                                 <div class="row gx-3">
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Día</label>
-                                                        <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
+                                                        <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateDay"] ?? null; ?>"/>
                                                     </div>
                                                     
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Mes</label>
                                                         <select id="BirthDateMonth" class="form-select bg-transparent" data-control="select2" data-placeholder="Mes" data-hide-search="false" name="BirthDateMonth">
                                                             <option value=""></option>
-                                                            <option value="1">Enero</option>
-                                                            <option value="2">Febrero</option>
-                                                            <option value="3">Marzo</option>
-                                                            <option value="4">Abril</option>
-                                                            <option value="5">Mayo</option>
-                                                            <option value="6">Junio</option>
-                                                            <option value="7">Julio</option>
-                                                            <option value="8">Agosto</option>
-                                                            <option value="9">Septiembre</option>
-                                                            <option value="10">Octubre</option>
-                                                            <option value="11">Noviembre</option>
-                                                            <option value="12">Diciembre</option>
+                                                            <option value="1" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '1') ? 'selected' : ''; ?>>Enero</option>
+                                                            <option value="2" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '2') ? 'selected' : ''; ?>>Febrero</option>
+                                                            <option value="3" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '3') ? 'selected' : ''; ?>>Marzo</option>
+                                                            <option value="4" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '4') ? 'selected' : ''; ?>>Abril</option>
+                                                            <option value="5" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '5') ? 'selected' : ''; ?>>Mayo</option>
+                                                            <option value="6" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '6') ? 'selected' : ''; ?>>Junio</option>
+                                                            <option value="7" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '7') ? 'selected' : ''; ?>>Julio</option>
+                                                            <option value="8" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '8') ? 'selected' : ''; ?>>Agosto</option>
+                                                            <option value="9" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '9') ? 'selected' : ''; ?>>Septiembre</option>
+                                                            <option value="10" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '10') ? 'selected' : ''; ?>>Octubre</option>
+                                                            <option value="11" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '11') ? 'selected' : ''; ?>>Noviembre</option>
+                                                            <option value="12" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '12') ? 'selected' : ''; ?>>Diciembre</option>
                                                         </select>
                                                     </div>
 
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Año</label>
-                                                        <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
+                                                        <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateYear"] ?? null; ?>"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -266,12 +268,15 @@
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="<?php echo BASE_URL; ?>view/cliente/js/ciudadesDepa.js"></script>
+    <script src="<?php echo BASE_URL; ?>view/cliente/js/registro.js"></script>
     <!--end::Custom Javascript-->
     <script>
+        let registrar = "<?php echo $_SESSION['urlOtp'] ?? 0; ?>";; // 1 para registrar, 0 para actualizar
+        let urlActualizar = "<?php echo BASE_URL; ?>cliente/php/registro";
         let userDepto = "<?php echo $_SESSION['usuario']['RegionId'] ?? ''; ?>";
         let userCity  = "<?php echo $_SESSION['usuario']['City'] ?? ''; ?>";
-        let urlEnviar = "<?php echo BASE_URL; ?>prueba/prueba6";
         let urlCiudadesDepa = "<?php echo BASE_URL; ?>view/cliente/json/ciudadesDepa.json";
+        let urlOtp = "<?php echo BASE_URL; ?>cliente/otp";
     </script>
     <!--end::Javascript-->
 </body>

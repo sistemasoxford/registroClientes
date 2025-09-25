@@ -63,6 +63,7 @@ try {
         $c = $clientes[0];
 
         $datosCliente = [
+            "CustomerId" => $c->CustomerId ?? null,
             "PassportNumber" => $c->CustomerId ?? null,
             "FirstName"  => $c->FirstName ?? null,
             "LastName"   => $c->LastName ?? null,

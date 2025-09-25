@@ -16,6 +16,7 @@ class ControlSesion {
         if ($datosCliente && is_array($datosCliente)) {
             // Guardar todos los datos si existe en SOAP
             $_SESSION['usuario'] = [
+                "CustomerId" => $datosCliente['CustomerId'] ?? null,
                 "PassportNumber" => $documento,
                 "FirstName"    => $datosCliente['FirstName'] ?? null,
                 "LastName"  => $datosCliente['LastName'] ?? null,

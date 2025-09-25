@@ -9,6 +9,8 @@
         header('Location: ' . BASE_URL);
         exit;
     }
+
+    $_SESSION['urlOtp'] = 1;
 ?>
 
 <!DOCTYPE html>
@@ -269,9 +271,10 @@
     <script src="<?php echo BASE_URL; ?>view/cliente/js/registro.js"></script>
     <!--end::Custom Javascript-->
     <script>
+        let registrar = "<?php echo $_SESSION['urlOtp'] ?? 1; ?>"; // 1 para registrar, 0 para actualizar
         let userDepto = "<?php echo $_SESSION['usuario']['RegionId'] ?? ''; ?>";
         let userCity  = "<?php echo $_SESSION['usuario']['City'] ?? ''; ?>";
-        let urlEnviar = "<?php echo BASE_URL; ?>cliente/php/registro";
+        let urlRegistrar = "<?php echo BASE_URL; ?>cliente/php/registro";
         let urlCiudadesDepa = "<?php echo BASE_URL; ?>view/cliente/json/ciudadesDepa.json";
         let urlOtp = "<?php echo BASE_URL; ?>cliente/otp";
     </script>

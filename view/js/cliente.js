@@ -24,7 +24,14 @@ $(document).ready(function(){
             data: formData,
             dataType: "json",
             success: function(response){
-                if(response.success != 1){
+                if(response.success === 1){
+                    Swal.fire({
+                        text: response.message || "No se recibió documento.",
+                        icon: "error",
+                        timer: 2000, // 2 segundos
+                        showConfirmButton: false
+                    })
+                } else {
                     if(response.success){
                         Swal.fire({
                             text: response.message || "Cliente encontrado.",
@@ -44,16 +51,8 @@ $(document).ready(function(){
                         }).then(() => {
                             window.location.href = urlRegistrar;
                         });
-                    }   
-                } else {
-                    Swal.fire({
-                        text: response.message || "No se recibió documento.",
-                        icon: "error",
-                        timer: 2000, // 2 segundos
-                        showConfirmButton: false
-                    })
+                    }
                 }
-            
             },
             error: function(xhr, status, error){
                 console.error(error);

@@ -12,6 +12,11 @@ $(document).ready(function () {
     $('#Email').on('input', function () {
     this.value = this.value.replace(/\\s+/g, '');
     });
+
+    $('#BirthDateDay, #BirthDateYear').on('input', function () {
+    // Solo números positivos (quita todo lo que no sea dígito)
+    this.value = this.value.replace(/[^0-9]/g, '');
+    });
     
     $('#clienteForm').on('submit', function (e) {
         e.preventDefault();

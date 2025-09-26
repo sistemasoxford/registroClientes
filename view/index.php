@@ -38,27 +38,26 @@
         }
     </style>
 </head>
-<body class="app-default d-flex flex-column min-vh-100">
+<body class="app-default d-flex flex-column">
 
     <!--begin::App-->
-    <div class="d-flex flex-column min-vh-100 align-items-center justify-content-between">
+    <div class="d-flex flex-column  align-items-center justify-content-between">
 
         <!-- Logo superior -->
-        <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-20 mb-3">
-            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="425" >
+        <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-20 mb-20">
+            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
         </div>
 
         <!-- Formulario centrado más abajo -->
-        <div class="w-100 w-md-100 w-lg-400px p-4 p-lg-10 mt-5 mb-5">
-            <form class="form w-100 row" id="clienteForm">
+        <div class="w-100 w-md-100 w-lg-400px p-4 p-lg-10 mt-20 mb-20">
+            <form class="form w-100 row mt-20 mb-20" id="clienteForm">
 
                 <!-- Documento -->
                <div class="fv-row mb-5 col-12 pe-0 text-center">
                     <label class="form-label d-block">Documento</label>
-                    <input type="tell" 
+                    <input type="text" 
                         name="PassportNumber" 
-                        autocomplete="off"
-                        id="PassportNumber" 
+                        autocomplete="off" 
                         class="form-control bg-transparent mx-auto" 
                         style="max-width: 250px;" />
                 </div>
@@ -80,7 +79,7 @@
         </div>
 
         <!-- Logo inferior más pegado abajo -->
-        <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-bottom mb-20 mt-20">
+        <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-bottom mb-0 mt-20">
             <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/away.png" class="img-fluid" width="150" height="150">
         </div>
 

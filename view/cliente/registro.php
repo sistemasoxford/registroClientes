@@ -116,7 +116,7 @@
                                             <!-- Documento -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Documento</label>
-                                                <input type="tell" name="PassportNumber" id="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>" />
+                                                <input type="tel" name="PassportNumber" id="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>" />
                                             </div>
 
                                             <!-- Nombre -->
@@ -144,7 +144,7 @@
                                             <div class="row gx-3">
                                                 <label class="mb-2">Fecha de nacimiento</label>
                                                 <div class="fv-row mb-5 col-4">
-                                                    <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
+                                                    <input type="tel" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
                                                 </div>
                                                 
                                                 <div class="fv-row mb-5 col-4">
@@ -166,7 +166,7 @@
                                                 </div>
 
                                                 <div class="fv-row mb-5 col-4">
-                                                    <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
+                                                    <input type="tel" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
                                                 </div>
                                             </div>
 
@@ -180,7 +180,7 @@
                                             <!-- Celular -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required" required>Celular</label>
-                                                <input type="tell" name="CellularPhoneNumber" id="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value=""/>
+                                                <input type="tel" name="CellularPhoneNumber" id="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value=""/>
                                             </div>
 
                                             <!-- Departamento -->

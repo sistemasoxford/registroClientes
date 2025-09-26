@@ -82,17 +82,21 @@
                         <div id="kt_app_content" class="app-content flex-column-fluid">
                             <!--begin::Content container-->
 							<div id="kt_app_content_container" class="app-container container-xxl">
-                                <!--begin::Form-->
+                                <!-- Logo superior -->
+                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-3 mb-3">
+                                <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
+                            </div>     
+                            <!--begin::Form-->
                                 <div class="d-flex flex-center flex-column flex-lg-row-fluid">
                                     <!--begin::Wrapper-->
                                     <div class="w-lg-500px p-10">
                                         <!--begin::Form-->
                                         <form class="form w-100 row" id="clienteForm">
-                                            <div class="text-center mb-11 pe-0">
+                                            <!-- <div class="text-center mb-11 pe-0">
                                                 <h1 class="text-dark mb-3" style="color: #000000 !important;font-family: Poppins;">
                                                     Registro de Cliente
                                                 </h1>
-                                            </div>
+                                            </div> -->
 
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Tipo de Documento</label>
@@ -109,7 +113,7 @@
                                             <!-- Documento -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Documento</label>
-                                                <input type="tell" name="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>"/>
+                                                <input type="tel" name="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Nombre -->
@@ -139,7 +143,7 @@
                                                 <div class="row gx-3">
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Día</label>
-                                                        <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateDay"] ?? null; ?>"/>
+                                                        <input type="tel" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateDay"] ?? null; ?>"/>
                                                     </div>
                                                     
                                                     <div class="fv-row mb-5 col-md-4">
@@ -163,7 +167,7 @@
 
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Año</label>
-                                                        <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateYear"] ?? null; ?>"/>
+                                                        <input type="tel" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateYear"] ?? null; ?>"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,7 +181,7 @@
                                             <!-- Celular -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Celular</label>
-                                                <input type="tell" name="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["CellularPhoneNumber"] ?? null; ?>"/>
+                                                <input type="tel" name="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["CellularPhoneNumber"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Dirección -->
@@ -228,8 +232,9 @@
                                                 </button>
                                             </div>
 
-                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0">
-                                              <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="h-90px h-lg-75px">
+                                            <!-- Logo inferior más pegado abajo -->
+                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-bottom mb-20 mt-20">
+                                                <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/away.png" class="img-fluid" width="150" height="150">
                                             </div>
                                         </form>
                                         <!--end::Form-->

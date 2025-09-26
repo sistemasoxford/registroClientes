@@ -36,7 +36,7 @@
     </script>
 </head>
 
-<body class="app-default d-flex flex-column min-vh-100">
+<body class="app-default d-flex flex-column">
 
     <!-- Contenedor principal -->
     <div class="d-flex flex-column flex-grow-1 align-items-center justify-content-between">
@@ -55,7 +55,7 @@
                 <!-- Campo OTP -->
                 <div class="fv-row mb-5 col-12 pe-0 text-center">
                     <label class="form-label d-block">Código de verificación</label>
-                    <input type="tell" 
+                    <input type="tel" 
                         id="otp"
                         name="otp" 
                         autocomplete="off" 

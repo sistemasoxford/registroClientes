@@ -60,7 +60,8 @@
                         name="otp" 
                         autocomplete="off" 
                         class="form-control bg-transparent mx-auto" 
-                        style="max-width: 250px;" />
+                        style="max-width: 250px;" 
+                        maxlength="6"/>
                 </div>
 
                 

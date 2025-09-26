@@ -6,6 +6,18 @@ $(document).ready(function() {
         var formData = {};
         $(this).serializeArray().map(function(x){ formData[x.name] = x.value; });
 
+        Swal.fire({
+            title: "Cargando...",
+            text: "Por favor, espere mientras procesamos su solicitud.",
+            icon: "info",
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+
         $.ajax({
             url: urlOtp, // archivo PHP donde recibes los datos
             type: "POST",

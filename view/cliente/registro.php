@@ -144,7 +144,7 @@
                                             <div class="row gx-3">
                                                 <label class="mb-2">Fecha de nacimiento</label>
                                                 <div class="fv-row mb-5 col-4">
-                                                    <input type="tel" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
+                                                    <input type="tel" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value="" maxlength = "2"/>
                                                 </div>
                                                 
                                                 <div class="fv-row mb-5 col-4">
@@ -166,7 +166,7 @@
                                                 </div>
 
                                                 <div class="fv-row mb-5 col-4">
-                                                    <input type="tel" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
+                                                    <input type="tel" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value="" maxlength = "4"/>
                                                 </div>
                                             </div>
 

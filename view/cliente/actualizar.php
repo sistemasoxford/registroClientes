@@ -143,7 +143,7 @@
                                                 <div class="row gx-3">
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Día</label>
-                                                        <input type="tel" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateDay"] ?? null; ?>"/>
+                                                        <input type="tel" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" maxlength = "2" value="<?php echo $_SESSION["usuario"]["BirthDateDay"] ?? null; ?>"/>
                                                     </div>
                                                     
                                                     <div class="fv-row mb-5 col-md-4">
@@ -167,7 +167,7 @@
 
                                                     <div class="fv-row mb-5 col-md-4">
                                                         <label class="mb-2">Año</label>
-                                                        <input type="tel" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateYear"] ?? null; ?>"/>
+                                                        <input type="tel" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" maxlength = "4" value="<?php echo $_SESSION["usuario"]["BirthDateYear"] ?? null; ?>"/>
                                                     </div>
                                                 </div>
                                             </div>

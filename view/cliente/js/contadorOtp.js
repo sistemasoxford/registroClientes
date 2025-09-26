@@ -66,6 +66,17 @@ reenviarEl.addEventListener("click", function (e) {
 
     var formData = { enviar: true };
 
+    Swal.fire({
+        title: "Cargando...",
+        text: "Por favor, espere mientras procesamos su solicitud.",
+        icon: "info",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    });
+
     $.ajax({
         url: urlReenviarOtp,
         method: "POST",

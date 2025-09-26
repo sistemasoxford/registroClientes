@@ -212,12 +212,15 @@
                                                 </label>
                                             </div>
 
+                                            <div class="fv-row mb-8 col-md-12 pe-0">
+                                                <span class="text-start fw-semibold text-gray-700 fs-base">
+                                                    Al dar clic en siguiente se te enviara un código a tu número de celular, el cual debes ingresar en la siguiente pantalla para validar tu identidad.
+                                                </span>
+                                            </div>
+
                                             <!-- Botón -->
                                             <div class="d-grid mb-5 pe-0">
-                                                <button type="submit" 
-                                                        id="kt_sign_up_submit" 
-                                                        class="btn btn-dark mx-auto w-100" 
-                                                        style="background-color: #000000; max-width: 250px;">
+                                                <button type="submit" id="kt_sign_up_submit" class="btn btn-dark" style="background-color: #000000;">
                                                     <span class="indicator-label">Enviar</span>
                                                     <span class="indicator-progress">Por favor espere...
                                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>

@@ -87,7 +87,7 @@ class ControlOtp {
      */
     function enviarOtp() {
         $otp = $this->generarOtp();
-        $mensaje = "Hola " . $_SESSION['cliente']['nombres'] . " " . $_SESSION['cliente']['apellidos'] . " Tu código de verificación OXFORDJEANS es: $otp";
+        $mensaje = "Hola, " . $_SESSION['cliente']['nombres'] . " " . $_SESSION['cliente']['apellidos'] . ", Tu código de verificación es: $otp \n" . " En Moda Oxford S.A.S., valoramos profundamente la confianza que depositas en nosotros. Por eso queremos invitarte a autorizar el tratamiento de tus datos personales, conforme a nuestra política 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos Por seguridad, para autenticar tu identidad y completar la autorización, ingresa el código";
 
         // setear el mensaje en el modelo
         $this->objOtp->setContent($mensaje);

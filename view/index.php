@@ -55,7 +55,7 @@
                 <!-- Documento -->
                <div class="fv-row mb-5 col-12 pe-0 text-center">
                     <label class="form-label d-block">Documento</label>
-                    <input type="text" 
+                    <input type="tell" 
                         name="PassportNumber" 
                         autocomplete="off" 
                         class="form-control bg-transparent mx-auto" 

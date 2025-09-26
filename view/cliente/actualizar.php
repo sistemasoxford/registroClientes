@@ -109,7 +109,7 @@
                                             <!-- Documento -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Documento</label>
-                                                <input type="text" name="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>"/>
+                                                <input type="tell" name="PassportNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["PassportNumber"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Nombre -->
@@ -177,7 +177,7 @@
                                             <!-- Celular -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Celular</label>
-                                                <input type="text" name="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["CellularPhoneNumber"] ?? null; ?>"/>
+                                                <input type="tell" name="CellularPhoneNumber" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["CellularPhoneNumber"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Dirección -->
@@ -207,7 +207,7 @@
                                                 <label class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" name="TextValue" value="d" />
                                                     <span class="form-check-label fw-semibold text-gray-700 fs-base ms-1">
-                                                        Acepto los <a href="<?php echo BASE_URL; ?>aceptarTerminos/condiciones1" target="_blank" class="link-primary">términos y condiciones</a>
+                                                        Acepto los <a href="https://www.oxfordjeans.com/terminos/tratamiento-de-datos" target="_blank" class="link-primary">términos y condiciones</a>
                                                     </span>
                                                 </label>
                                             </div>

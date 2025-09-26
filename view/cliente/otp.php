@@ -55,7 +55,7 @@
                 <!-- Campo OTP -->
                 <div class="fv-row mb-5 col-12 pe-0 text-center">
                     <label class="form-label d-block">Código de verificación</label>
-                    <input type="text" 
+                    <input type="tell" 
                         id="otp"
                         name="otp" 
                         autocomplete="off" 

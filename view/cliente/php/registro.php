@@ -19,11 +19,19 @@ try {
         // Instancia Cliente
         $objCliente = new Cliente($data['tDocumento'],  $data['PassportNumber'], $data['FirstName'], $data['LastName'], $data['Sex'], $data['BirthDateDay'], $data['BirthDateMonth'], $data['BirthDateYear'], $data['Email'], $data['CellularPhoneNumber'], $data['CityText'], $data['RegionId'], $data['City'], $data['TermsAccepted']);
         $objControlCliente = new ControlCliente($objCliente, $objOtp);
+        
+        // if ((!empty($data['CellularPhoneNumber']))) {
+        //         echo json_encode([
+        //             "success" => false,
+        //             "message" => "Campo celular vacio.",
+        //             "otp_enviado" => false
+        //         ]);
+        // }
 
         if ($objControlCliente->guardarDatos()) {
 
             $envio = $objControlOtp->enviarOtp();
-            // Guardar datos del cliente
+
             if ($envio['resultado']['success'] && $objControlCliente->registraOtp()) {
                 
                 echo json_encode([

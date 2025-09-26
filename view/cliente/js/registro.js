@@ -9,6 +9,10 @@ $(document).ready(function () {
     this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
     });
 
+    $('#Email').on('input', function () {
+    this.value = this.value.replace(/\\s+/g, '');
+    });
+    
     $('#clienteForm').on('submit', function (e) {
         e.preventDefault();
 
@@ -28,6 +32,87 @@ $(document).ready(function () {
             CityText: $('#City option:selected').text(),
             TermsAccepted: $('input[name="TextValue"]').is(':checked') ? 1 : 0
         };
+
+        if (!formData.tDocumento) {
+            Swal.fire({
+                text: "El campo de tipo documento no puede estar vacío.",
+                icon: "warning",
+            });
+            return; // Detener el proceso si la cédula está vacía
+        } else if (!formData.PassportNumber) {
+            Swal.fire({
+                text: "El campo de documento no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.FirstName) {
+            Swal.fire({
+                text: "El campo de primer nombre no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.LastName) {
+            Swal.fire({
+                text: "El campo de primer apellido no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.Sex) {
+            Swal.fire({
+                text: "El campo de genero no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.BirthDateDay) {
+            Swal.fire({
+                text: "El campo dia de nacimiento no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.BirthDateMonth) {
+            Swal.fire({
+                text: "El campo mes de nacimiento no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.BirthDateYear) {
+            Swal.fire({
+                text: "El campo año de nacimiento no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.Email) {
+            Swal.fire({
+                text: "El campo de correo no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.CellularPhoneNumber) {
+            Swal.fire({
+                text: "El campo de celular no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.RegionId) {
+            Swal.fire({
+                text: "El campo de departamento no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.City) {
+            Swal.fire({
+                text: "El campo de ciudad no puede estar vacío.",
+                icon: "warning",
+            });
+            return;
+        } else if (!formData.TermsAccepted) {
+            Swal.fire({
+                text: "Por favor, acepte los Términos y Condiciones antes de continuar.",
+                icon: "info",
+            });
+            return;
+        }
+
 
         Swal.fire({
             title: "Cargando...",

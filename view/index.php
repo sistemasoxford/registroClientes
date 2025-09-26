@@ -45,7 +45,7 @@
 
         <!-- Logo superior -->
         <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-20 mb-3">
-            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
+            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="425" >
         </div>
 
         <!-- Formulario centrado más abajo -->

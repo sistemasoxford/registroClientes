@@ -59,7 +59,7 @@ try {
     } else {
         echo json_encode([
             "success" => false,
-            "message" => "No se recibieron datos del formulario."
+            "message" => "Por favor digite el código de verificación"
         ]);
         exit;
     }

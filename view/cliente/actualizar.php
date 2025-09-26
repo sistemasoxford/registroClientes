@@ -82,21 +82,17 @@
                         <div id="kt_app_content" class="app-content flex-column-fluid">
                             <!--begin::Content container-->
 							<div id="kt_app_content_container" class="app-container container-xxl">
-                            <!-- Logo superior -->
-                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-3 mb-3">
-                                <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
-                            </div> 
                                 <!--begin::Form-->
                                 <div class="d-flex flex-center flex-column flex-lg-row-fluid">
                                     <!--begin::Wrapper-->
                                     <div class="w-lg-500px p-10">
                                         <!--begin::Form-->
                                         <form class="form w-100 row" id="clienteForm">
-                                            <!-- <div class="text-center mb-11 pe-0">
+                                            <div class="text-center mb-11 pe-0">
                                                 <h1 class="text-dark mb-3" style="color: #000000 !important;font-family: Poppins;">
                                                     Registro de Cliente
                                                 </h1>
-                                            </div> -->
+                                            </div>
 
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Tipo de Documento</label>
@@ -138,35 +134,39 @@
                                             </div>
 
                                             <!-- Fecha nacimiento -->
-                                            <div class="row gx-3">
-                                                <label class="mb-2">Fecha de nacimiento</label>
-                                                <div class="fv-row mb-5 col-4">
-                                                    <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value=""/>
-                                                </div>
-                                                
-                                                <div class="fv-row mb-5 col-4">
-                                                    <select id="BirthDateMonth" class="form-select bg-transparent" data-control="select2" data-placeholder="Mes" data-hide-search="false" name="BirthDateMonth">
-                                                        <option value=""></option>
-                                                        <option value="1">Enero</option>
-                                                        <option value="2">Febrero</option>
-                                                        <option value="3">Marzo</option>
-                                                        <option value="4">Abril</option>
-                                                        <option value="5">Mayo</option>
-                                                        <option value="6">Junio</option>
-                                                        <option value="7">Julio</option>
-                                                        <option value="8">Agosto</option>
-                                                        <option value="9">Septiembre</option>
-                                                        <option value="10">Octubre</option>
-                                                        <option value="11">Noviembre</option>
-                                                        <option value="12">Diciembre</option>
-                                                    </select>
-                                                </div>
+                                            <div class="fv-row mb-5 col-md-12">
+                                                <label class="mb-3 fw-bold d-block">Fecha de Nacimiento</label>
+                                                <div class="row gx-3">
+                                                    <div class="fv-row mb-5 col-md-4">
+                                                        <label class="mb-2">Día</label>
+                                                        <input type="number" placeholder="Día" name="BirthDateDay" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateDay"] ?? null; ?>"/>
+                                                    </div>
+                                                    
+                                                    <div class="fv-row mb-5 col-md-4">
+                                                        <label class="mb-2">Mes</label>
+                                                        <select id="BirthDateMonth" class="form-select bg-transparent" data-control="select2" data-placeholder="Mes" data-hide-search="false" name="BirthDateMonth">
+                                                            <option value=""></option>
+                                                            <option value="1" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '1') ? 'selected' : ''; ?>>Enero</option>
+                                                            <option value="2" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '2') ? 'selected' : ''; ?>>Febrero</option>
+                                                            <option value="3" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '3') ? 'selected' : ''; ?>>Marzo</option>
+                                                            <option value="4" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '4') ? 'selected' : ''; ?>>Abril</option>
+                                                            <option value="5" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '5') ? 'selected' : ''; ?>>Mayo</option>
+                                                            <option value="6" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '6') ? 'selected' : ''; ?>>Junio</option>
+                                                            <option value="7" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '7') ? 'selected' : ''; ?>>Julio</option>
+                                                            <option value="8" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '8') ? 'selected' : ''; ?>>Agosto</option>
+                                                            <option value="9" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '9') ? 'selected' : ''; ?>>Septiembre</option>
+                                                            <option value="10" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '10') ? 'selected' : ''; ?>>Octubre</option>
+                                                            <option value="11" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '11') ? 'selected' : ''; ?>>Noviembre</option>
+                                                            <option value="12" <?php echo (($_SESSION["usuario"]["BirthDateMonth"] ?? '') == '12') ? 'selected' : ''; ?>>Diciembre</option>
+                                                        </select>
+                                                    </div>
 
-                                                <div class="fv-row mb-5 col-4">
-                                                    <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value=""/>
+                                                    <div class="fv-row mb-5 col-md-4">
+                                                        <label class="mb-2">Año</label>
+                                                        <input type="number" name="BirthDateYear" placeholder="Año" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["BirthDateYear"] ?? null; ?>"/>
+                                                    </div>
                                                 </div>
                                             </div>
-
 
                                             <!-- Email -->
                                             <div class="fv-row mb-5 col-md-12 pe-0">
@@ -220,25 +220,16 @@
 
                                             <!-- Botón -->
                                             <div class="d-grid mb-5 pe-0">
-<<<<<<< HEAD
-                                                <button type="submit" 
-                                                        id="kt_sign_up_submit" 
-                                                        class="btn btn-dark mx-auto w-100" 
-                                                        style="background-color: #000000; max-width: 250px;">
-                                                    <span class="indicator-label">Enviar</span>
-=======
                                                 <button type="submit" id="kt_sign_up_submit" class="btn btn-dark" style="background-color: #000000;">
                                                     <span class="indicator-label">Siguiente</span>
->>>>>>> 1899822 (fix: otp)
                                                     <span class="indicator-progress">Por favor espere...
                                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                                     </span>
                                                 </button>
                                             </div>
 
-                                            <!-- Logo inferior más pegado abajo -->
-                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-bottom mb-20 mt-20">
-                                                <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/away.png" class="img-fluid" width="150" height="150">
+                                            <div class="text-gray-500 text-center fw-semibold fs-6 pe-0">
+                                              <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="h-90px h-lg-75px">
                                             </div>
                                         </form>
                                         <!--end::Form-->

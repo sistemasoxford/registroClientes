@@ -57,7 +57,8 @@
                     <label class="form-label d-block">Documento</label>
                     <input type="tell" 
                         name="PassportNumber" 
-                        autocomplete="off" 
+                        autocomplete="off"
+                        id="PassportNumber" 
                         class="form-control bg-transparent mx-auto" 
                         style="max-width: 250px;" />
                 </div>

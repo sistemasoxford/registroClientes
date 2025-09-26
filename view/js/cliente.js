@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+    $('#PassportNumber').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, ''); 
+    });
+
+
     $("#clienteForm").on("submit", function(e){
         e.preventDefault(); // evita que recargue la página
 

@@ -13,7 +13,7 @@ $documento = $_POST['PassportNumber'] ?? null;
 
 if (!$documento) {
     echo json_encode([
-        "success" => false,
+        "success" => 1,
         "message" => "No se recibió documento."
     ]);
     exit;

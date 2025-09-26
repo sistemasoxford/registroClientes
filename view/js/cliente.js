@@ -24,27 +24,36 @@ $(document).ready(function(){
             data: formData,
             dataType: "json",
             success: function(response){
-                if(response.success){
-                    Swal.fire({
-                        text: response.message || "Cliente encontrado.",
-                        icon: "success",
-                        timer: 2000, // 2 segundos
-                        showConfirmButton: false
-                    }).then(() => {
-                        window.location.href = urlActualizar;
-                    });
+                if(response.success != 1){
+                    if(response.success){
+                        Swal.fire({
+                            text: response.message || "Cliente encontrado.",
+                            icon: "success",
+                            timer: 2000, // 2 segundos
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = urlActualizar;
+                        });
 
+                    } else {
+                        Swal.fire({
+                            text: response.message || "Cliente para registro.",
+                            icon: "success",
+                            timer: 2000, // 2 segundos
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = urlRegistrar;
+                        });
+                    }   
                 } else {
                     Swal.fire({
-                        text: response.message || "Cliente para registro.",
-                        icon: "success",
+                        text: response.message || "No se recibió documento.",
+                        icon: "error",
                         timer: 2000, // 2 segundos
                         showConfirmButton: false
-                    }).then(() => {
-                        window.location.href = urlRegistrar;
-                    });
-
+                    })
                 }
+            
             },
             error: function(xhr, status, error){
                 console.error(error);

@@ -119,13 +119,13 @@
                                             <!-- Nombre -->
                                             <div class="fv-row mb-5 col-md-6 pe-0">
                                                 <label class="mb-2 required">Primer Nombre</label>
-                                                <input type="text" name="FirstName" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["FirstName"] ?? null; ?>"/>
+                                                <input type="text" id="FirstName" name="FirstName" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["FirstName"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Apellido -->
                                             <div class="fv-row mb-5 col-md-6 pe-0">
                                                 <label class="mb-2 required">Primer Apellido</label>
-                                                <input type="text" name="LastName" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["LastName"] ?? null; ?>"/>
+                                                <input type="text" id="LastName" name="LastName" autocomplete="off" class="form-control bg-transparent" value="<?php echo $_SESSION["usuario"]["LastName"] ?? null; ?>"/>
                                             </div>
 
                                             <!-- Sexo -->

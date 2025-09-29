@@ -7,9 +7,11 @@ $(document).ready(function () {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 
-    // Solo letras en nombres y apellidos
+    // Solo letras en nombres y apellidos, sin espacios y en mayúscula
     $('#FirstName, #LastName').on('input', function () {
-        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+        this.value = this.value
+            .replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '')
+            .toUpperCase();                        
     });
 
     // Email: quitar espacios

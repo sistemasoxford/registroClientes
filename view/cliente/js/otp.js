@@ -17,7 +17,6 @@ $(document).ready(function() {
             },
         });
 
-
         $.ajax({
             url: urlOtp, // archivo PHP donde recibes los datos
             type: "POST",

@@ -40,11 +40,6 @@ class ControlRuta {
         $this->cargarVista404();
     }
     
-    
-    
-    
-    
-
     private function cargarVista($path) {
         if (is_file($path)) {
             include $path;

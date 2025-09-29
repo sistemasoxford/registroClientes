@@ -51,14 +51,14 @@ class ControlCustomer {
                     'CellularPhoneNumber' => $_SESSION['cliente']['telefono'] ?? ''
                 ],
                 'AddressData' => [
-                    'AddressLine1'  => $_SESSION['cliente']['direccion'] ?? '',
-                    'City'          => $_SESSION['cliente']['direccion'] ?? '',
-                    'ZipCode'       => $_SESSION['cliente']['ciudad'] ?? '',
+                    'AddressLine1'  => $_SESSION['cliente']['nombre_ciudad'] ?? '',
+                    'City'          => $_SESSION['cliente']['nombre_ciudad'] ?? '',
+                    'ZipCode'       => $_SESSION['cliente']['codigo_postal'] ?? '',
                     'CountryId'     => 'COL',
                     'CountryIdType' => 'ISO3',
-                    'RegionId'      => $_SESSION['cliente']['region'] ?? ''
+                    'RegionId'      => $_SESSION['cliente']['codigo_departamento'] ?? ''
                 ],
-                'UsualStoreId'   => '1293',
+                'UsualStoreId'   => $_SESSION['cliente']['codigo_tienda'],
 
                 'UserFields' => [
                     'UserField' => [

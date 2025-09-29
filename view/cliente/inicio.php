@@ -4,6 +4,35 @@
     require_once BASE_PATH . 'config/autoload.php';
     require_once BASE_PATH . 'config/rutas.php';
 
+    // Obtener la URL completa
+    $url = $_SERVER['REQUEST_URI'];
+
+    // Usar una expresión regular para extraer el número de la tienda y el número de la pregunta
+    if (preg_match('/\/(\d+)(?:\/(\d+))?\/?$/', $url, $matches)) {
+        $tienda = $matches[1];
+
+        if (!is_numeric($tienda)) {
+            header("Location: " . BASE_URL . "404");
+            exit();
+        }
+    } else {
+        header("Location: " . BASE_URL . "404");
+        exit();
+    }
+
+    $objTienda = new Tienda(null, $tienda);
+    $objControlTienda = new ControlTienda($objTienda);
+    $resultado = $objControlTienda->buscarTienda();
+    if ($resultado['success']) {
+        $_SESSION['cliente']['nombre_ciudad'] = $resultado['data']['nombre_ciudad'];
+        $_SESSION['cliente']['codigo_tienda'] = $resultado['data']['codigo_tienda'];
+        $_SESSION['cliente']['codigo_postal'] = $resultado['data']['codigo_postal'];
+        $_SESSION['cliente']['codigo_departamento'] = $resultado['data']['codigo_departamento'];
+    } else {
+        // Manejar el error si la tienda no se encuentra
+        die("Error: " . $resultado['message']);
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

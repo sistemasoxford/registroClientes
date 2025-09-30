@@ -191,7 +191,7 @@
                                             </div> -->
 
                                             <!-- Departamento -->
-                                            <div class="fv-row mb-5 col-md-12 pe-0">
+                                            <div class="fv-row mb-5 col-md-12 pe-0" style="display: none;">
                                                 <label class="mb-2 required">Departamento</label>
                                                 <select id="RegionId" class="form-select bg-transparent" data-control="select2" data-placeholder="Seleccione un departamento" data-hide-search="false" name="status">
                                                     <option value=""></option>
@@ -199,7 +199,7 @@
                                             </div>
 
                                             <!-- Ciudad -->
-                                            <div class="fv-row mb-5 col-md-12 pe-0">
+                                            <div class="fv-row mb-5 col-md-12 pe-0" style="display: none;">
                                                 <label class="mb-2 required">Ciudad</label>
                                                 <select id="City" class="form-select bg-transparent" data-control="select2" data-placeholder="Seleccione una ciudad" data-hide-search="false" name="status">
                                                     <option value=""></option>
@@ -231,6 +231,7 @@
                                                     </span>
                                                 </button>
                                             </div>
+                                            <!-- <input type="hidden" name='userPostal' id="userPostal" value="<?php echo $_SESSION["usuario"]["codigo_postal"] ?? null; ?>"> -->
 
                                             <!-- Logo inferior más pegado abajo -->
                                             <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-bottom mb-20 mt-20">
@@ -289,6 +290,76 @@
         let urlCiudadesDepa = "<?php echo BASE_URL; ?>view/cliente/json/ciudadesDepa.json";
         let urlOtp = "<?php echo BASE_URL; ?>cliente/otp";
         let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal";
+        // let userPostal = document.getElementById('userPostal').value;
+        let userPostal = "<?= $_SESSION['cliente']['codigo_postal'] ?? '' ?>";
+
+                $(document).ready(function() {
+            let dataCiudades = [];
+
+            // Código postal que quieres usar para preseleccionar (puede venir de sesión PHP)
+            // ejemplo, reemplazar con tu variable dinámica
+
+            $.getJSON(urlCiudadesDepa, function(data) {
+                dataCiudades = data;
+
+                // Extraer departamentos únicos
+                let departamentos = [...new Map(data.map(item => [item.codigo, {
+                    id: item.codigo,
+                    text: item.departamento
+                }])).values()];
+
+                // Inicializar select2 de departamentos
+                $('#RegionId').select2({
+                    data: departamentos,
+                    placeholder: "Selecciona un departamento"
+                });
+
+                // Función para preseleccionar por código postal
+                function preseleccionarPorPostal(codigoPostal) {
+                    let registro = dataCiudades.find(c => c.postal === codigoPostal);
+                    if (!registro) return;
+
+                    // Seleccionar departamento
+                    $('#RegionId').val(registro.codigo).trigger('change');
+
+                    // Escuchar cuando las ciudades se carguen
+                    $('#RegionId').one('select2:select', function() {
+                        // Filtrar ciudades del departamento
+                        let ciudadesFiltradas = dataCiudades
+                            .filter(c => c.codigo === registro.codigo)
+                            .map(c => ({ id: c.postal, text: c.Ciudad }));
+
+                        $('#City').empty().select2({
+                            data: ciudadesFiltradas,
+                            placeholder: "Selecciona una ciudad"
+                        });
+
+                        // Seleccionar ciudad
+                        $('#City').val(registro.postal).trigger('change');
+                    });
+                }
+        console.log(userPostal)
+                // Preseleccionar usando el postal
+                if (userPostal) {
+                    preseleccionarPorPostal(userPostal);
+                }
+            });
+
+            // Cuando se selecciona un departamento manualmente, cargar ciudades filtradas
+            $('#RegionId').on('change', function() {
+                let codigoDepto = $(this).val();
+                let ciudadesFiltradas = dataCiudades
+                    .filter(c => c.codigo === codigoDepto)
+                    .map(c => ({ id: c.postal, text: c.Ciudad }));
+
+                $('#City').empty().select2({
+                    data: ciudadesFiltradas,
+                    placeholder: "Selecciona una ciudad"
+                });
+            });
+        });
+
+        
     </script>
     <!--end::Javascript-->
 </body>

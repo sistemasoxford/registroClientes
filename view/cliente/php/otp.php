@@ -45,7 +45,7 @@ try {
             }else{
                 echo json_encode([
                     "success" => false,
-                    "message" => "Error al registrar el cliente"
+                    "message" => $registrarCegid['response']
                 ]);
             }
             

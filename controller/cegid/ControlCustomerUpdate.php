@@ -18,7 +18,7 @@ class ControlCustomerUpdate
             'trace' => 1,
             'exceptions' => true,
             'cache_wsdl' => WSDL_CACHE_NONE,
-            'login' => $_ENV['SOAP_USER'] ?? '',
+            'login' => $_SESSION['loginSoap'],
             'password' => $_ENV['SOAP_PASS'] ?? ''
         ];
 

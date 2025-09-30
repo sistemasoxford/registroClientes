@@ -95,4 +95,34 @@ class ControlCustomerUpdateUser {
             return false;
         }
     }
+
+
+public function selectUserCegid($codigoTienda) {
+    try {
+        $this->db->abrirBd();
+        
+
+        // Obtener el último registro según created_at
+        $result = $this->db->ejecutarSelectRaw(
+            "SELECT usuario_cegid
+             FROM usuarios_cegid
+             WHERE codigo_tienda = '$codigoTienda'"
+        );
+
+        if ($result === false || $result->num_rows === 0) {
+            $this->db->cerrarBd();
+            return false;
+        }
+
+        // Extraer el valor de usuario_cegid
+        $row = $result->fetch_assoc();
+        
+        $this->db->cerrarBd();
+
+        return $row['usuario_cegid'];
+
+    } catch (Exception $e) {
+        return false;
+    }
+}
 }

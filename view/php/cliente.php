@@ -6,8 +6,8 @@ require_once BASE_PATH . 'config/env.php';
 
 loadEnv();
 
-$login = $_ENV['SOAP_USER'] ?? '';
-$pass = $_ENV['SOAP_PASS'] ?? '';
+// $login = $_ENV['SOAP_USER'] ?? '';
+// $pass = $_ENV['SOAP_PASS'] ?? '';
 
 $documento = $_POST['PassportNumber'] ?? null;
 
@@ -25,13 +25,22 @@ $objCliente = new Cliente(null, $documento);
 // Instancia ControlSesion
 $controlSesion = new ControlSesion($objCliente);
 
+$objControlCustomerUpdate = new ControlCustomerUpdateUser();
+
+$resultado = $objControlCustomerUpdate->selectUserCegid(
+                $_SESSION['cliente']['codigo_tienda']
+            );
+
+$_SESSION['loginSoap'] = "Y2_C4_PROD\\" . $resultado;
+
 // Config SOAP
 $wsdl = "http://200.41.6.86/Y2_PROD/CustomerWcfService.svc?wsdl";
 $options = [
     "trace" => 1,
     "exceptions" => true,
     "cache_wsdl" => WSDL_CACHE_NONE,
-    'login' => $_ENV['SOAP_USER'] ?? '',
+    // 'login' => $_ENV['SOAP_USER'] ?? '',
+    'login' => $_SESSION['loginSoap'],
     'password' => $_ENV['SOAP_PASS'] ?? ''
 ];
 

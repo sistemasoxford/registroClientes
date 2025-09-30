@@ -26,6 +26,11 @@ try {
                 $data['instagram_user'],
                 $codigoTienda
             );
+            // Eliminar la variable de sesión del cliente
+            unset($_SESSION['cliente']);
+            unset($_SESSION['usuario']);
+            unset($_SESSION['urlOtp']);
+            session_destroy();
             echo json_encode([
                 "success" => $resultado,
                 "message" => "Registro completado usuario"
@@ -38,6 +43,11 @@ try {
                 $objCliente,
                 $codigoTienda
             );
+            // Eliminar la variable de sesión del cliente
+            unset($_SESSION['cliente']);
+            unset($_SESSION['usuario']);
+            unset($_SESSION['urlOtp']);
+            session_destroy();
             echo json_encode([
                 "success" => $resultado,
                 "message" => "Registro completado tienda"

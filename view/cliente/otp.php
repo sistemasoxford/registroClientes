@@ -34,6 +34,17 @@
             window.top.location.replace(window.self.location.href);
         }
     </script>
+    <style>
+        .instructions {
+            font-size: 17px;
+            font-weight: 400;
+            margin-bottom: 35px; /* espacio con el texto de instagram */
+            line-height: 1.6;
+        }
+        .instructions strong {
+            font-weight: 700;
+        }
+    </style>
 </head>
 
 <body class="app-default d-flex flex-column">
@@ -54,7 +65,7 @@
 
                 <!-- Campo OTP -->
                 <div class="fv-row mb-5 col-12 pe-0 text-center">
-                    <label class="form-label d-block">Código de verificación</label>
+                    <label class="instructions form-label d-block">Ingresa el código de verificación que llegará a tu celular o correo</label>
                     <input type="tel" 
                         id="otp"
                         name="otp" 
@@ -116,6 +127,7 @@
         let urlReenviarOtp = "<?php echo BASE_URL; ?>cliente/php/reenviarOtp";
         let urlEliminarSesion = "<?php echo BASE_URL; ?>";
         let urlRegistrar = "<?php echo BASE_URL; ?>cliente/registro";
+        let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal";
     </script>
 </body>
 </html>

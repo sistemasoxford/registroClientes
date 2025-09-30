@@ -288,6 +288,7 @@
         let userCity  = "<?php echo $_SESSION['usuario']['City'] ?? ''; ?>";
         let urlCiudadesDepa = "<?php echo BASE_URL; ?>view/cliente/json/ciudadesDepa.json";
         let urlOtp = "<?php echo BASE_URL; ?>cliente/otp";
+        let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal";
     </script>
     <!--end::Javascript-->
 </body>

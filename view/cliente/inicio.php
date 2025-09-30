@@ -133,6 +133,7 @@
         let urlCliente = "<?php echo BASE_URL; ?>php/cliente";
         let urlActualizar = "<?php echo BASE_URL; ?>cliente/actualizar";
         let urlRegistrar = "<?php echo BASE_URL; ?>cliente/registro";
+        let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal";
     </script>
 </body>
 </html>

@@ -3,7 +3,6 @@
     require_once BASE_PATH . 'config/config.php';
     require_once BASE_PATH . 'config/autoload.php';
     require_once BASE_PATH . 'config/rutas.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,9 +15,6 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-
-    <!-- Vendor Styles -->
-    <link href="<?php echo BASE_URL; ?>vendor/plugins/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 
     <!-- Global Styles -->
     <link href="<?php echo BASE_URL; ?>plugins/css/plugins.bundle.css" rel="stylesheet" type="text/css" />
@@ -82,61 +78,58 @@
 <body class="app-default d-flex flex-column">
 
     <!--begin::App-->
-    <div class="d-flex flex-column  align-items-center justify-content-between">
+    <div class="d-flex flex-column align-items-center justify-content-between min-vh-100 py-10">
 
         <!-- Logo superior -->
-        <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-20 mb-5">
-            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
+        <div class="logo-top mb-10 text-center">
+            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" width="180">
         </div>
 
-        <span class="badge-step">Paso #1</span>
+        <!-- Contenido central -->
+        <div class="text-center w-100 px-4" style="max-width: 420px;">
 
+            <!-- Paso #2 -->
+            <span class="badge-step mt-5">Paso #2</span>
 
-        <!-- Formulario centrado más abajo -->
-        <div class="w-100 w-md-100 w-lg-400px p-4 p-lg-10 mt-20 mb-20">
-            <form class="form w-100 row mt-20 mb-20" id="clienteForm">
+            <!-- Instrucciones -->
+            <p class="instructions mt-15">
+                Ahora, para terminar tu inscripción,<br>
+                Síguenos en nuestras redes sociales <br>
+                <strong>@OXFORDJEANS</strong>
+            </p>
 
-                <!-- Documento -->
-               <div class="fv-row mb-5 col-12 pe-0 text-center">
-                    <label class="form-label d-block">Documento</label>
-                    <input type="tel" 
-                        name="PassportNumber" 
-                        autocomplete="off" 
-                        class="form-control bg-transparent mx-auto" 
-                        style="max-width: 250px;" />
+            <!-- Formulario -->
+            <form id="clienteForm" class="form w-100">
+
+                <!-- Input Instagram -->
+                <div class="mb-4 mt-20">
+                    <label class="form-label">
+                        Déjanos tu usuario de instagram para encontrarte en motivo de que seas un ganador
+                    </label>
+                    <input type="text"
+                           name="instagram_user"
+                           placeholder="@TuUsuario"
+                           autocomplete="off"
+                           class="form-control mx-auto"
+                           style="max-width: 280px;" />
                 </div>
 
                 <!-- Botón -->
-                <div class="d-grid mb-5 pe-0">
-                    <button type="submit" 
-                            id="kt_sign_up_submit" 
-                            class="btn btn-dark mx-auto w-100" 
-                            style="background-color: #000000; max-width: 250px;">
-                        <span class="indicator-label">Siguiente</span>
-                        <span class="indicator-progress">Por favor espere...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </span>
-                    </button>
-                </div>
-
+                <button type="submit"
+                        id="kt_sign_up_submit"
+                        class="btn btn-dark w-100 mx-auto"
+                        style="max-width: 280px;">
+                    Finalizar
+                </button>
             </form>
         </div>
 
-        <!-- Logo inferior más pegado abajo -->
-        <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-bottom mb-0 mt-20">
-            <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/away.png" class="img-fluid" width="150" height="150">
+        <!-- Footer -->
+        <div class="text-center mt-auto footer-text">
+            A WAY TO LIVE
         </div>
-
     </div>
     <!--end::App-->
-
-    <!-- Scrolltop -->
-    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-        <i class="ki-duotone ki-arrow-up">
-            <span class="path1"></span>
-            <span class="path2"></span>
-        </i>
-    </div>
 
     <!-- Scripts -->
     <script src="<?php echo BASE_URL; ?>plugins/js/plugins.bundle.js"></script>

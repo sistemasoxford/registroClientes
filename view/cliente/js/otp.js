@@ -32,7 +32,7 @@ $(document).ready(function() {
                         timer: 2000, // 2 segundos
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = urlEliminarSesion;
+                        window.location.href = urlPasoFinal;
                     });
                 } else {
                     Swal.fire({

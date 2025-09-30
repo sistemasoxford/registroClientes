@@ -3,6 +3,12 @@
     require_once BASE_PATH . 'config/config.php';
     require_once BASE_PATH . 'config/autoload.php';
     require_once BASE_PATH . 'config/rutas.php';
+
+    if (!isset($_SESSION['cliente']) || !isset($_SESSION['cliente']['documento']) || !isset($_SESSION['usuario']['PassportNumber'])) {
+    header('Location: ' . BASE_URL);
+    exit;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -139,6 +145,7 @@
     <script>
         let urlCliente = "<?php echo BASE_URL; ?>php/cliente";
         let urlActualizar = "<?php echo BASE_URL; ?>cliente/actualizar";
+        let urlEliminarSesion = "<?php echo BASE_URL; ?>";
         let urlRegistrar = "<?php echo BASE_URL; ?>cliente/registro";
     </script>
 </body>

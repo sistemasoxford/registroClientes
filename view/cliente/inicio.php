@@ -33,6 +33,7 @@
         die("Error: " . $resultado['message']);
     }
 
+    echo $_SESSION['cliente']['codigo_tienda'];
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -105,7 +105,7 @@
             </p>
 
             <!-- Formulario -->
-            <form id="clienteForm" class="form w-100">
+            <form id="instagramForm" class="form w-100">
 
                 <!-- Input Instagram -->
                 <div class="mb-4 mt-20">
@@ -115,6 +115,7 @@
                     <input type="text"
                            name="instagram_user"
                            placeholder="@TuUsuario"
+                           id="instagram_user"
                            autocomplete="off"
                            class="form-control mx-auto"
                            style="max-width: 280px;" />
@@ -141,11 +142,13 @@
     <script src="<?php echo BASE_URL; ?>plugins/js/plugins.bundle.js"></script>
     <script src="<?php echo BASE_URL; ?>plugins/js/scripts.bundle.js"></script>
     <script src="<?php echo BASE_URL; ?>view/js/cliente.js"></script>
+    <script src="<?php echo BASE_URL; ?>view/cliente/js/pasoFinal.js"></script>
+    
 
     <script>
-        let urlCliente = "<?php echo BASE_URL; ?>php/cliente";
+        let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/php/pasoFinal";
         let urlActualizar = "<?php echo BASE_URL; ?>cliente/actualizar";
-        let urlEliminarSesion = "<?php echo BASE_URL; ?>";
+        let urlEliminarSesion = "<?php echo BASE_URL; ?>cliente/inicio/<?php echo $_SESSION['cliente']['codigo_tienda']; ?>";
         let urlRegistrar = "<?php echo BASE_URL; ?>cliente/registro";
     </script>
 </body>

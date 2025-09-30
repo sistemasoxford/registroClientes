@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $("#clienteForm").on("submit", function(e) {
         e.preventDefault(); // Evita el envío tradicional
 
@@ -32,6 +33,7 @@ $(document).ready(function() {
                         timer: 2000, // 2 segundos
                         showConfirmButton: false
                     }).then(() => {
+                        console.log('')
                         window.location.href = urlPasoFinal;
                     });
                 } else {

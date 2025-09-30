@@ -8,6 +8,7 @@
         header('Location: ' . BASE_URL);
         exit;
     }
+    echo BASE_URL . "cliente/pasoFinal";
 ?>
 <!DOCTYPE html>
 <html lang="es">

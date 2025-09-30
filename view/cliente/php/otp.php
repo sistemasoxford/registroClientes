@@ -34,9 +34,9 @@ try {
 
             if($registrar['success'] && $registrarCegid['success']) {
                 // Eliminar la variable de sesión del cliente
-                unset($_SESSION['cliente']);
-                unset($_SESSION['usuario']);
-                unset($_SESSION['urlOtp']);
+                // unset($_SESSION['cliente']);
+                // unset($_SESSION['usuario']);
+                // unset($_SESSION['urlOtp']);
                 // session_destroy(); // Destruir toda la sesión si no se necesita para otros propósitos
                 echo json_encode([
                     "success" => $verificacion['success'],

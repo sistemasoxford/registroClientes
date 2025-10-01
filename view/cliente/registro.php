@@ -104,12 +104,11 @@
                                             <div class="fv-row mb-5 col-md-12 pe-0">
                                                 <label class="mb-2 required">Tipo de Documento</label>
                                                 <select id="tDocumento" class="form-select bg-transparent" data-control="select2" data-placeholder="Seleccione el tipo de documento" data-hide-search="false" name="tDocumento">
-                                                    <option value=""></option>
-                                                    <option value="CC">Cédula de Ciudadanía</option>
+                                                    <option selected value="CC">Cédula de Ciudadanía</option>
                                                     <option value="CE">Cédula de Extranjería</option>
                                                     <option value="NIT">NIT</option>
                                                     <option value="P">Pasaporte</option>
-                                                    <option value="TI">Tarjeta de Identidad</option>
+                                                    <!-- <option value="TI">Tarjeta de Identidad</option> -->
                                                 </select>
                                             </div>
 

@@ -70,7 +70,7 @@ class ControlCustomer {
                     ]
                 ],
 
-                'LongDescription' => 'Ingresado desde la web'
+                'LongDescription' => 'Registro sorteo instagram'
             ],
             'clientContext' => [
                 'DatabaseId' => 'Y2_C4_PROD'

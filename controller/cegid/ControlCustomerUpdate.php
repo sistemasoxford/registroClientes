@@ -76,7 +76,7 @@ class ControlCustomerUpdate
                     ]
                 ],
 
-                'LongDescription' => 'Ingresado desde la web'
+                'LongDescription' => 'Actualización sorteo instagram'
             ],
             'clientContext' => [
                 'DatabaseId' => 'Y2_C4_PROD'

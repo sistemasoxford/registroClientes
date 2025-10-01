@@ -114,7 +114,7 @@
                     </label>
                     <input type="text"
                            name="instagram_user"
-                           placeholder="@TuUsuario"
+                           placeholder="@TuUsuarioInstagram"
                            id="instagram_user"
                            autocomplete="off"
                            class="form-control mx-auto"

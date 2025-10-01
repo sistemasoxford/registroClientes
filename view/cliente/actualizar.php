@@ -106,7 +106,7 @@
                                                     <option value="ce">Cédula de Extranjería</option>
                                                     <option value="nit">NIT</option>
                                                     <option value="p">Pasaporte</option>
-                                                    <option value="TI">Tarjeta de Identidad</option>
+                                                    <!-- <option value="TI">Tarjeta de Identidad</option> -->
                                                 </select>
                                             </div>
 

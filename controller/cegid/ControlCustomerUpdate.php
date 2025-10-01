@@ -76,7 +76,7 @@ class ControlCustomerUpdate
                     ]
                 ],
 
-                'LongDescription' => 'Actualización sorteo instagram'
+                'LongDescription' => 'Actualizacion sorteo instagram'
             ],
             'clientContext' => [
                 'DatabaseId' => 'Y2_C4_PROD'

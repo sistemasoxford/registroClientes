@@ -3,6 +3,8 @@
 require_once BASE_PATH . 'config/config.php';
 require_once BASE_PATH . 'config/autoload.php';
 require_once BASE_PATH . 'config/env.php';
+require_once BASE_PATH . 'vendor/autoload.php';
+
 
 loadEnv();
 
@@ -28,6 +30,7 @@ $baseUrl = 'https://172.36.16.23/registroClientes/cliente/inicio';
 
 // Carpeta para guardar los códigos QR
 $qrFolder = $_SERVER['DOCUMENT_ROOT'] . '/public/links/';
+echo $qrFolder;
 if (!is_dir($qrFolder)) {
     mkdir($qrFolder, 0777, true);
 }

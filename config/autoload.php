@@ -89,13 +89,14 @@ spl_autoload_register(function ($class) {
     $endroid_prefix = 'Endroid\\QrCode\\';
     $endroid_len = strlen($endroid_prefix);
     if (strncmp($endroid_prefix, $class, $endroid_len) === 0) {
-        $relative_class = substr($class, $endroid_len);
+        $relative_class = substr($class, strlen('Endroid\\'));
         $file = $endroid_qrcode_base_dir . str_replace('\\', '/', $relative_class) . '.php';
         if (file_exists($file)) {
             require $file;
         }
         return;
     }
+
 
     // Handle TCPDF (clase sin namespace)
     if ($class === 'TCPDF') {

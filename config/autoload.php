@@ -15,15 +15,15 @@ function searchInDirectories($directory, $className) {
 // Registra el autoloader personalizado
 spl_autoload_register(function ($class) {
     // Base directories for the namespaces
-    $psr_base_dir = BASE_PATH . '/vendor/psr/simple-cache/src/';
-    $phpspreadsheet_base_dir = BASE_PATH . '/vendor/PhpSpreadsheet/';
-    $phpmailer_base_dir = BASE_PATH . '/vendor/phpmailer/src/';
-    $baconqrcode_base_dir = BASE_PATH . '/vendor/BaconQrCode/src/';
-    $dasprid_enum_base_dir = BASE_PATH . '/vendor/Enum-master/src/';
-    $tcpdf_base_dir = BASE_PATH . '/vendor/TCPDF-main/'; // Nueva ruta para TCPDF
-    $controller = BASE_PATH . '/controller/';
-    $model = BASE_PATH . '/model/';
-    
+    $psr_base_dir             = BASE_PATH . '/vendor/psr/simple-cache/src/';
+    $phpspreadsheet_base_dir  = BASE_PATH . '/vendor/PhpSpreadsheet/';
+    $phpmailer_base_dir       = BASE_PATH . '/vendor/phpmailer/src/';
+    $baconqrcode_base_dir     = BASE_PATH . '/vendor/BaconQrCode/src/';
+    $dasprid_enum_base_dir    = BASE_PATH . '/vendor/Enum-master/src/';
+    $tcpdf_base_dir           = BASE_PATH . '/vendor/TCPDF-main/'; 
+    $endroid_qrcode_base_dir  = BASE_PATH . '/vendor/endroid/qr-code/src/';
+    $controller               = BASE_PATH . '/controller/';
+    $model                    = BASE_PATH . '/model/';
 
     // Handle psr/simple-cache classes
     $psr_prefix = 'Psr\\SimpleCache\\';
@@ -79,6 +79,18 @@ spl_autoload_register(function ($class) {
     if (strncmp($dasprid_enum_prefix, $class, $dasprid_enum_len) === 0) {
         $relative_class = substr($class, $dasprid_enum_len);
         $file = $dasprid_enum_base_dir . str_replace('\\', '/', $relative_class) . '.php';
+        if (file_exists($file)) {
+            require $file;
+        }
+        return;
+    }
+
+    // Handle Endroid/QrCode classes
+    $endroid_prefix = 'Endroid\\QrCode\\';
+    $endroid_len = strlen($endroid_prefix);
+    if (strncmp($endroid_prefix, $class, $endroid_len) === 0) {
+        $relative_class = substr($class, $endroid_len);
+        $file = $endroid_qrcode_base_dir . str_replace('\\', '/', $relative_class) . '.php';
         if (file_exists($file)) {
             require $file;
         }

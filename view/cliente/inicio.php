@@ -87,6 +87,7 @@
                     <label class="form-label d-block">Documento</label>
                     <input type="tel" 
                         name="PassportNumber" 
+                        id="PassportNumber"
                         autocomplete="off" 
                         class="form-control bg-transparent mx-auto" 
                         style="max-width: 250px;" />
@@ -133,7 +134,11 @@
         let urlCliente = "<?php echo BASE_URL; ?>php/cliente";
         let urlActualizar = "<?php echo BASE_URL; ?>cliente/actualizar";
         let urlRegistrar = "<?php echo BASE_URL; ?>cliente/registro";
-        let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal";        
+        let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal"; 
+        document.getElementById("PassportNumber").addEventListener("input", function() {
+            // Permitir solo números
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });       
     </script>
 </body>
 </html>

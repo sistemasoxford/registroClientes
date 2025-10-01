@@ -7,7 +7,6 @@ vendor/
 # Ignorar directorios específicos dentro de public/, pero mantener .gitkeep
 config/config.php
 
-public/images/*
 !public/images/.gitkeep
 
 historial_resultados.json

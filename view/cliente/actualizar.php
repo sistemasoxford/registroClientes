@@ -291,6 +291,7 @@
         let urlPasoFinal = "<?php echo BASE_URL; ?>cliente/pasoFinal";
         // let userPostal = document.getElementById('userPostal').value;
         let userPostal = "<?= $_SESSION['cliente']['codigo_postal'] ?? '' ?>";
+        let reionId = "<?= $_SESSION['cliente']['codigo_departamento'] ?>";
 
                 $(document).ready(function() {
             let dataCiudades = [];
@@ -338,6 +339,7 @@
                     });
                 }
         console.log(userPostal)
+        console.log(reionId)
                 // Preseleccionar usando el postal
                 if (userPostal) {
                     preseleccionarPorPostal(userPostal);

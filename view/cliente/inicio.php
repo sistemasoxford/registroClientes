@@ -24,15 +24,21 @@
     $objControlTienda = new ControlTienda($objTienda);
     $resultado = $objControlTienda->buscarTienda();
     if ($resultado['success']) {
+        $codigoTienda = $resultado['data']['codigo_tienda'];
+    
+        // Si tiene menos de 4 dígitos, se completa con ceros a la izquierda
+        $codigoTienda = str_pad($codigoTienda, 4, "0", STR_PAD_LEFT);
+
+
         $_SESSION['cliente']['nombre_ciudad'] = $resultado['data']['nombre_ciudad'];
-        $_SESSION['cliente']['codigo_tienda'] = $resultado['data']['codigo_tienda'];
+        $_SESSION['cliente']['codigo_tienda'] = $codigoTienda;
         $_SESSION['cliente']['codigo_postal'] = $resultado['data']['codigo_postal'];
         $_SESSION['cliente']['codigo_departamento'] = $resultado['data']['codigo_departamento'];
+        $_SESSION['cliente']['nombre_tienda'] = $resultado['data']['nombre_tienda'];
     } else {
         // Manejar el error si la tienda no se encuentra
         die("Error: " . $resultado['message']);
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">

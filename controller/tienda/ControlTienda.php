@@ -18,7 +18,7 @@ class ControlTienda {
         $tienda = $this->objTienda->getCodigo();
 
         $querySelect = new QuerySelect();
-        $comandoSql = $querySelect->select("t.codigo AS codigo_tienda, c.postal AS codigo_postal, d.codigo AS codigo_departamento, c.nombre AS nombre_ciudad")
+        $comandoSql = $querySelect->select("t.codigo AS codigo_tienda, t.nombre AS nombre_tienda, c.postal AS codigo_postal, d.codigo AS codigo_departamento, c.nombre AS nombre_ciudad")
                                   ->from("tiendas t")->innerJoin("ciudadxtiendas ct", "t.id = ct.idtienda")
                                   ->innerJoin("ciudades c", "ct.idciudad = c.id")
                                   ->innerJoin("departamentosxciudades dc", "c.id = dc.idciudad")

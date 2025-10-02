@@ -27,6 +27,9 @@ class ControlCustomer {
      * Construye los parámetros para el servicio AddNewCustomer
      */
     private function buildParams() {
+
+    $departCode = str_pad($_SESSION['cliente']['codigo_departamento'], 2, "0", STR_PAD_LEFT);
+
         return [
             'customerData' => [
                 'FirstName'      => $_SESSION['cliente']['nombres'] ?? '',
@@ -56,7 +59,8 @@ class ControlCustomer {
                     'ZipCode'       => $_SESSION['cliente']['codigo_postal'] ?? '',
                     'CountryId'     => 'COL',
                     'CountryIdType' => 'ISO3',
-                    'RegionId'      => $_SESSION['cliente']['codigo_departamento'] ?? ''
+                    
+                    'RegionId'      => $departCode ?? ''
                 ],
                 'UsualStoreId'   => $_SESSION['cliente']['codigo_tienda'],
 
@@ -93,7 +97,7 @@ class ControlCustomer {
         } catch (Exception $e) {
             return [
                 "success" => false,
-                "error"   => $e->getMessage(),
+                "error"   => $params = $this->buildParams(),
                 "request" => $this->client->__getLastRequest(),
                 "response"=> $this->client->__getLastResponse()
             ];

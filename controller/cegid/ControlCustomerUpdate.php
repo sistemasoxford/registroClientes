@@ -30,6 +30,7 @@ class ControlCustomerUpdate
      */
     private function buildParams()
     {
+        $departCode = str_pad($_SESSION['cliente']['codigo_departamento'], 2, "0", STR_PAD_LEFT);
         return [
 
             'customerId' => $_SESSION['cliente']['customerId'] ?? null,
@@ -62,7 +63,7 @@ class ControlCustomerUpdate
                     'ZipCode'       => $_SESSION['cliente']['codigo_postal'] ?? '',
                     'CountryId' => 'COL',
                     'CountryIdType' => 'ISO3',
-                    'RegionId'      => $_SESSION['cliente']['codigo_departamento'] ?? ''
+                    'RegionId'      => $departCode ?? ''
                 ],
                 'UsualStoreId' => $_SESSION['cliente']['codigo_tienda'],
 

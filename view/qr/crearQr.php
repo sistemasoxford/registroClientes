@@ -26,7 +26,7 @@ try {
 }
 
 // Base URL
-$baseUrl = 'https://172.36.16.62/registroClientes/cliente/inicio';
+$baseUrl = 'https://clientes.oxfordjeans.com/cliente/inicio';
 
 // Carpeta para guardar los códigos QR
 $qrFolder = $_SERVER['DOCUMENT_ROOT'] . '/public/links/';

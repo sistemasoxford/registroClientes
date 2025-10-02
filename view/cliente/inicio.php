@@ -66,6 +66,58 @@
         .logo-bottom img {
             max-height: 20px;
         }
+         body {
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        .logo-top img {
+            max-height: 100px;
+        }
+        .badge-step {
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 6px 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 30px; /* espacio debajo del paso */
+        }
+        .instructions {
+            font-size: 17px;
+            font-weight: 400;
+            margin-bottom: 35px; /* espacio con el texto de instagram */
+            line-height: 1.6;
+        }
+        .instructions strong {
+            font-weight: 700;
+        }
+        .form-label {
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .btn-dark {
+            background-color: #000 !important;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 40px; /* aire antes del botón */
+        }
+        .footer-text {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 50px; /* espacio antes del footer */
+        }
     </style>
 </head>
 <body class="app-default d-flex flex-column">
@@ -77,6 +129,7 @@
         <div class="text-gray-500 text-center fw-semibold fs-6 pe-0 logo-top mt-20 mb-20">
             <img alt="Logo" src="<?php echo BASE_URL; ?>public/images/oxfdord.png" class="img-fluid" width="200" height="420" >
         </div>
+        <span class="badge-step">Paso #1</span>
 
         <!-- Formulario centrado más abajo -->
         <div class="w-100 w-md-100 w-lg-400px p-4 p-lg-10 mt-20 mb-20">

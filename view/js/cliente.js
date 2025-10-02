@@ -35,7 +35,9 @@ $(document).ready(function(){
                         icon: "error",
                         timer: 2000, // 2 segundos
                         showConfirmButton: false
-                    })
+                    }).then(() => {
+                            window.location.href = urlEliminarSesion;
+                        });
                 } else {
                     if(response.success){
                         Swal.fire({

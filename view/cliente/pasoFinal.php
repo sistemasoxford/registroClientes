@@ -108,7 +108,7 @@
             <form id="instagramForm" class="form w-100">
 
                 <!-- Input Instagram -->
-                <div class="mb-4 mt-20">
+                <div class="mb-4 mt-20" style = "display:none">
                     <label class="form-label">
                         Déjanos tu usuario de instagram para encontrarte en motivo de que seas un ganador
                     </label>

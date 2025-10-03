@@ -2,6 +2,7 @@
 require_once BASE_PATH . '/config/config.php';
 require_once BASE_PATH . '/config/env.php';
 require_once(QUERY_OBJECT_PATH . 'objectSelect.php');
+require BASE_PATH . '/vendor/autoload.php';
 
 // =========================================================================
 // SOLUCIÓN: Usar los namespaces de PHPMailer

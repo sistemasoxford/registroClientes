@@ -1,5 +1,5 @@
 <?php
-require_once('controller/controlRuta.php');
+require_once( __DIR__ .'/controller/ControlRuta.php');
 
 try {
     if (isset($_GET['view'])) {

@@ -15,7 +15,7 @@ try {
         
         $objOtp = new Otp("+57" . $data['CellularPhoneNumber']);
         $objControlOtp = new ControlOtp($objOtp);
-        
+        $_SESSION['cliente']['email'] = $data['Email'];
         // Instancia Cliente
         $objCliente = new Cliente($data['tDocumento'],  $data['PassportNumber'], $data['FirstName'], $data['LastName'], $data['Sex'], $data['BirthDateDay'], $data['BirthDateMonth'], $data['BirthDateYear'], $data['Email'], $data['CellularPhoneNumber'], $data['CityText'], $data['RegionId'], $data['City'], $data['TermsAccepted']);
         $objControlCliente = new ControlCliente($objCliente, $objOtp);
@@ -24,11 +24,11 @@ try {
 
             $envio = $objControlOtp->enviarOtp();
             // Guardar datos del cliente
-            if ($envio['resultado']['success'] && $objControlCliente->registraOtp()) {
+            if ($envio['resultadoSMS']['success'] && $objControlCliente->registraOtp()) {
                 
                 echo json_encode([
                     "success" => true,
-                    "message" => "Tú código ha sido enviado.",
+                    "message" => $envio['resultadoCorreo']['message'],
                     "otp_enviado" => true
                 ]);
             } else {

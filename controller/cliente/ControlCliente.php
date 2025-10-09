@@ -30,8 +30,7 @@ class ControlCliente {
         $region = $_SESSION['cliente']['region'];
         $terminos = $_SESSION['cliente']['terminos'];
         $otp = $this->objOtp->getOtp();
-        $medioEnvio = $this->objCliente->getMedioEnvio();
-
+        $medioEnvio = $_SESSION['cliente']['medioEnvio'];
         // Conexión a la base de datos
         $queryUpdate = new QueryUpdate();
         $comandoSql = $queryUpdate->table("habeas_data")

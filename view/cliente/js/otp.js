@@ -5,7 +5,7 @@ $(document).ready(function() {
 
         // Serializar datos del formulario a objeto JS
         var formData = {};
-        $(this).serializeArray().map(function(x){ formData[x.name] = x.value; });
+        $(this).serializeArray().map(function(x) { formData[x.name] = x.value; });
 
         Swal.fire({
             title: "Cargando...",
@@ -19,22 +19,20 @@ $(document).ready(function() {
         });
 
         $.ajax({
-            url: urlOtp, // archivo PHP donde recibes los datos
+            url: urlOtp, // 👈 PHP que procesará los datos
             type: "POST",
             contentType: "application/json; charset=UTF-8",
-            data: JSON.stringify(formData), // Enviamos en formato JSON
+            data: JSON.stringify(formData),
             dataType: "json", // Esperamos JSON de respuesta
             success: function(response) {
-                // Manejar respuesta de PHP
-                if(response.success) {
+                if (response.success) {
                     Swal.fire({
                         text: response.message,
                         icon: "success",
-                        timer: 2000, // 2 segundos
+                        timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
-                        console.log('')
-                        window.location.href = urlPasoFinal;
+                        window.location.href = urlPasoFinal; // 👈 redirección final
                     });
                 } else {
                     Swal.fire({
@@ -48,12 +46,15 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error("Error en AJAX:", error);
+                console.log("Respuesta del servidor:", xhr.responseText);
                 Swal.fire({
-                    title: "Error",
-                    text: "Ocurrió un error al procesar la solicitud. Inténtelo nuevamente más tarde.",
+                    title: "Error en el servidor",
+                    html: "<pre style='text-align:left;white-space:pre-wrap'>" + xhr.responseText + "</pre>",
                     icon: "error",
+                    width: 600,
                 });
             }
         });
     });
+
 });

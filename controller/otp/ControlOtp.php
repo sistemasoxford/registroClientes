@@ -1,6 +1,9 @@
 <?php
 require_once BASE_PATH . '/config/config.php';
 require_once BASE_PATH . '/config/env.php';
+require_once BASE_PATH . '/config/autoload.php';
+require_once 'vendor/autoload.php';
+
 require_once(QUERY_OBJECT_PATH . 'objectSelect.php');
 require BASE_PATH . '/vendor/autoload.php';
 
@@ -11,6 +14,9 @@ require BASE_PATH . '/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP; 
+
+use GuzzleHttp\Client;
+
 
 loadEnv();
 
@@ -78,6 +84,47 @@ class ControlOtp {
 
         } catch (Exception $e) {
             return ["success" => false, "message" => "Error enviando SMS: " . $e->getMessage()];
+        }
+    }
+
+    function enviarWSP($otp, $nombreCompleto) {
+
+        
+        $data = [
+            "message" => "Hola, " . $nombreCompleto . ", Tu código de verificación es: *".$otp."* \n" . " En Moda Oxford S.A.S., valoramos profundamente la confianza que depositas en nosotros. Por eso queremos invitarte a autorizar el tratamiento de tus datos personales, conforme a nuestra política 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos Por seguridad, para autenticar tu identidad y completar la autorización, ingresa el código",
+            "wa_id" => $this->objOtp->getRecipient(), // número de destino con código de país
+            "from_id" => 10279 
+        ];
+
+        try {
+            // ... (código cURL para enviar SMS)
+            $client = new Client();
+
+            $response = $client->request('POST', 'https://api-ws.wasapi.io/api/v1/whatsapp-messages', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $_ENV['WASAPI'],
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => json_encode($data)
+            ]);
+
+    
+            $httpCode = $response->getStatusCode();
+            $responseBody = $response->getBody()->getContents();
+            $decoded = json_decode($responseBody, true);
+            if ($httpCode >= 200 && $httpCode < 300) {
+                return ["success" => true, "data" => $decoded];
+            } else {
+                return [
+                    "success" => false,
+                    "status" => $httpCode,
+                    "error" => $decoded['message'] ?? $response
+                ];
+            }
+
+        } catch (Exception $e) {
+            return ["success" => false, "message" => "Error enviando WSP: " . $e->getMessage()];
         }
     }
 
@@ -169,17 +216,44 @@ class ControlOtp {
         // setear el mensaje en el modelo (para el SMS)
         $this->objOtp->setContent($mensajeSMS);
         $this->objOtp->setOtp($otp);
-
-        // Enviar el SMS
+        $medioEnvio = $_SESSION['cliente']['medioEnvio'];
+                // Enviar el SMS
         $resultadoSMS = $this->enviarSMS();
 
-        // Enviar el correo - Ahora se pasa el nombre completo
-        $resultadoCorreo = $this->enviarCorreo($_SESSION['cliente']['email'], $otp, $nombreCompleto);
+        if ($medioEnvio === 'sms+email'){
+            // Enviar el correo - Ahora se pasa el nombre completo
+            $resultadoCorreo = $this->enviarCorreo($_SESSION['cliente']['email'], $otp, $nombreCompleto);
+            return [
+                "otp" => $otp,
+                "resultadoSMS" => $resultadoSMS,
+                "resultadoCorreo" => $resultadoCorreo
+            ];
+        }
 
+        if ($medioEnvio === 'sms+whatsapp'){
+            
+            $resultadoCorreo = $this->enviarWSP($otp, $nombreCompleto);
+            return [
+                "otp" => $otp,
+                "resultadoSMS" => $resultadoSMS,
+                "resultadoCorreo" => ["success" => false, "message" => "Envío por correo no solicitado."]
+            ];
+        }
+
+        if ($medioEnvio === 'ambos'){
+            $resultadoCorreo = $this->enviarCorreo($_SESSION['cliente']['email'], $otp, $nombreCompleto);
+            $resultadoWSP = $this->enviarWSP($otp, $nombreCompleto);
+            return [
+                "otp" => $otp,
+                "resultadoSMS" => $resultadoSMS,
+                "resultadoCorreo" => $resultadoCorreo,
+            ];
+            // Enviar el correo - Ahora se pasa el nombre completo
+        }
         return [
             "otp" => $otp,
             "resultadoSMS" => $resultadoSMS,
-            "resultadoCorreo" => $resultadoCorreo
+            "resultadoCorreo" => ["success" => false, "message" => "Envío por correo no solicitado."]
         ];
     }
 

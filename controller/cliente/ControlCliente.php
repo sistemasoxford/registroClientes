@@ -30,11 +30,12 @@ class ControlCliente {
         $region = $_SESSION['cliente']['region'];
         $terminos = $_SESSION['cliente']['terminos'];
         $otp = $this->objOtp->getOtp();
+        $medioEnvio = $this->objCliente->getMedioEnvio();
 
         // Conexión a la base de datos
         $queryUpdate = new QueryUpdate();
         $comandoSql = $queryUpdate->table("habeas_data")
-                                  ->set(["tDocumento" => $tDocumento, "id" => $documento, "nombre" => $nombres, "apellido" => $apellidos, "sexo" => $sexo, "fecha_nacimiento" => $fechaNacimiento, "email" => $email, "telefono" => $telefono, "direccion" => $direccion, "ciudad" => $ciudad, "region" => $region, "terminos" => $terminos])
+                                  ->set(["tDocumento" => $tDocumento, "id" => $documento, "nombre" => $nombres, "apellido" => $apellidos, "sexo" => $sexo, "fecha_nacimiento" => $fechaNacimiento, "email" => $email, "telefono" => $telefono, "direccion" => $direccion, "ciudad" => $ciudad, "region" => $region, "terminos" => $terminos, "medio_envio" => $medioEnvio])
                                   ->where("id = '$documentoOriginal' AND otp = '$otp'");
 
         try{

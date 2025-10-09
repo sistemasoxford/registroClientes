@@ -1,31 +1,31 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     // ---------------- RESTRICCIONES DE CAMPOS ---------------- //
 
     // Solo números en documento y celular
-    $('#PassportNumber, #CellularPhoneNumber').on('input', function () {
+    $('#PassportNumber, #CellularPhoneNumber').on('input', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 
     // Solo letras en nombres y apellidos, sin espacios y en mayúscula
-    $('#FirstName, #LastName').on('input', function () {
+    $('#FirstName, #LastName').on('input', function() {
         this.value = this.value
             .replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '')
-            .toUpperCase();                        
+            .toUpperCase();
     });
 
     // Email: quitar espacios
-    $('#Email').on('input', function () {
+    $('#Email').on('input', function() {
         this.value = this.value.replace(/\s+/g, '');
     });
 
     // Solo números en día y año
-    $('#BirthDateDay, #BirthDateYear').on('input', function () {
+    $('#BirthDateDay, #BirthDateYear').on('input', function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 
     // Evitar año mayor al actual
-    $('#BirthDateYear').on('input', function () {
+    $('#BirthDateYear').on('input', function() {
         let currentYear = new Date().getFullYear();
         if (parseInt(this.value, 10) > currentYear) {
             this.value = currentYear;
@@ -37,7 +37,7 @@ $(document).ready(function () {
         return new Date(año, mes, 0).getDate(); // Ejemplo: feb 2024 → 29
     }
 
-    $('#BirthDateDay, #BirthDateMonth, #BirthDateYear').on('input change', function () {
+    $('#BirthDateDay, #BirthDateMonth, #BirthDateYear').on('input change', function() {
         let day = parseInt($('#BirthDateDay').val(), 10);
         let month = parseInt($('#BirthDateMonth').val(), 10);
         let year = parseInt($('#BirthDateYear').val(), 10);
@@ -54,7 +54,7 @@ $(document).ready(function () {
     });
 
     // ---------------- VALIDACIONES AL ENVIAR ---------------- //
-    $('#clienteForm').on('submit', function (e) {
+    $('#clienteForm').on('submit', async function(e) {
         e.preventDefault();
 
         var formData = {
@@ -119,6 +119,30 @@ $(document).ready(function () {
             return Swal.fire({ text: "Por favor, acepte los Términos y Condiciones antes de continuar.", icon: "info" });
         }
 
+        const { value: canal } = await Swal.fire({
+            title: "¿Porque medio adicional deseas recibir tu codigo OTP?",
+            text: "Selecciona el medio de envío:",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Continuar",
+            cancelButtonText: "Cancelar",
+            input: "select",
+            inputOptions: {
+                "sms+whatsapp": "WhatsApp",
+                "sms+email": "Email",
+                "ambos": "Ambos"
+            },
+            inputPlaceholder: "Selecciona una opción",
+            inputValidator: (value) => {
+                if (!value) {
+                    // No hacemos nada aquí, dejamos que el flujo continue como SMS
+                }
+            }
+        });
+
+        // if (canal) return; // si el usuario cancela
+
+        formData.canal = canal || "sms"; // 👉 se añade al JSON que irá al PHP
         // ---------------- ENVIAR FORMULARIO ---------------- //
         Swal.fire({
             title: "Cargando...",
@@ -143,10 +167,10 @@ $(document).ready(function () {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(formData),
-            beforeSend: function () {
+            beforeSend: function() {
                 $('#kt_sign_up_submit').attr('disabled', true);
             },
-            success: function (response) {
+            success: function(response) {
                 if (response.success) {
                     Swal.fire({
                         text: response.message,
@@ -166,7 +190,7 @@ $(document).ready(function () {
                     });
                 }
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error(xhr.responseText);
                 Swal.fire({
                     title: "Error",

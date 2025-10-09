@@ -16,8 +16,9 @@ try {
         $objOtp = new Otp("+57" . $data['CellularPhoneNumber']);
         $objControlOtp = new ControlOtp($objOtp);
         $_SESSION['cliente']['email'] = $data['Email'];
+        $_SESSION['cliente']['medioEnvio'] = $data['canal'];
         // Instancia Cliente
-        $objCliente = new Cliente($data['tDocumento'],  $data['PassportNumber'], $data['FirstName'], $data['LastName'], $data['Sex'], $data['BirthDateDay'], $data['BirthDateMonth'], $data['BirthDateYear'], $data['Email'], $data['CellularPhoneNumber'], $data['CityText'], $data['RegionId'], $data['City'], $data['TermsAccepted']);
+        $objCliente = new Cliente($data['tDocumento'],  $data['PassportNumber'], $data['FirstName'], $data['LastName'], $data['Sex'], $data['BirthDateDay'], $data['BirthDateMonth'], $data['BirthDateYear'], $data['Email'], $data['CellularPhoneNumber'], $data['CityText'], $data['RegionId'], $data['City'], $data['TermsAccepted'], $data['canal'] ?? 'sms');
         $objControlCliente = new ControlCliente($objCliente, $objOtp);
 
         if ($objControlCliente->guardarDatos()) {

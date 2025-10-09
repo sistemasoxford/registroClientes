@@ -14,7 +14,7 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($data['otp']))) {
         
         // Instancia Cliente
-        $objCliente = new Cliente(null, $_SESSION['cliente']['documento']);
+        $objCliente = new Cliente(tDocumento: null, documento: $_SESSION['cliente']['documento'], medioEnvio: $_SESSION['cliente']['medioEnvio']);
         $objOtp = new Otp(null, null, $data['otp']);
         $objControlOtp = new ControlOtp($objOtp, $objCliente);
 

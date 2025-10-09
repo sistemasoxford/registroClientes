@@ -16,7 +16,9 @@ class Cliente{
     var $ciudad;
     var $terminos; 
 
-    function __construct($tDocumento = null, $documento = null, $nombre = null, $apellido = null, $sexo = null, $dia = null, $mes = null, $anio = null, $correo = null, $celular = null, $direccion = null, $departamento = null, $ciudad = null, $terminos = null){
+    var $medioEnvio;
+
+    function __construct($tDocumento = null, $documento = null, $nombre = null, $apellido = null, $sexo = null, $dia = null, $mes = null, $anio = null, $correo = null, $celular = null, $direccion = null, $departamento = null, $ciudad = null, $terminos = null, $medioEnvio = null){
         if($tDocumento !== null){
             $this->setTDocumento($tDocumento);
         }
@@ -71,6 +73,10 @@ class Cliente{
 
         if($terminos !== null){
             $this->setTerminos($terminos);
+        }
+
+        if($medioEnvio !== null){
+            $this->setMedioEnvio($medioEnvio);
         }
     }
 
@@ -184,6 +190,9 @@ class Cliente{
 
     function getTerminos(){
         return $this->terminos;
+    }
+    function setMedioEnvio($medioEnvio){
+        $this->medioEnvio = $medioEnvio;
     }
     
 }

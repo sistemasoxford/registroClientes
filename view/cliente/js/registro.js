@@ -10,7 +10,7 @@ $(document).ready(function() {
     // Solo letras en nombres y apellidos, sin espacios y en mayúscula
     $('#FirstName, #LastName').on('input', function() {
         this.value = this.value
-            .replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '')
+            .replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '') // permite letras y espacios
             .toUpperCase();
     });
 

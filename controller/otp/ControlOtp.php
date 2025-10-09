@@ -144,7 +144,7 @@ class ControlOtp {
 
         // 2. Reemplazar placeholders en la plantilla
         $htmlBody = str_replace('[[NOMBRE_CLIENTE]]', $nombreCompleto, $htmlBody);
-        $htmlBody = str_replace('[[CODIGO_OTP]]', $otpGuion, $htmlBody);
+        $htmlBody = str_replace('[[CODIGO_OTP]]', $otp, $htmlBody);
 
         // 3. Configurar datos del correo
         $data = [

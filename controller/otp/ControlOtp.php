@@ -13,24 +13,26 @@ require BASE_PATH . '/vendor/autoload.php';
 // =========================================================================
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP; 
+use PHPMailer\PHPMailer\SMTP;
 
 use GuzzleHttp\Client;
-
+use GuzzleHttp\Exception\RequestException;
 
 loadEnv();
 
-class ControlOtp {
+class ControlOtp
+{
     private $objOtp;
     var $objCliente;
     private $apiKey;
     private $baseUrl;
     private $objControlConexion;
 
-    function __construct($objOtp = null, $objCliente = null) {
+    function __construct($objOtp = null, $objCliente = null)
+    {
         $this->objOtp = $objOtp;
         $this->objCliente = $objCliente;
-        $this->apiKey = $_ENV['BREVO']; 
+        $this->apiKey = $_ENV['BREVO'];
         $this->baseUrl = "https://api.brevo.com/v3/transactionalSMS/send";
         $this->objControlConexion = ControlConexion::getInstance();
     }
@@ -38,10 +40,11 @@ class ControlOtp {
     /**
      * Envía un SMS usando el contenido definido en $objOtp
      */
-    function enviarSMS() {
+    function enviarSMS()
+    {
         $data = [
             "sender" => "OXFORDJEANS",
-            "recipient" => $this->objOtp->getRecipient(), 
+            "recipient" => $this->objOtp->getRecipient(),
             "content" => $this->objOtp->getContent(),
             "type" => "transactional",
             "tag" => "Verificacion",
@@ -81,64 +84,268 @@ class ControlOtp {
                     "error" => $decoded['message'] ?? $response
                 ];
             }
-
         } catch (Exception $e) {
             return ["success" => false, "message" => "Error enviando SMS: " . $e->getMessage()];
         }
     }
 
-    function enviarWSP($otp, $nombreCompleto) {
-
-        
-        $data = [
-            "message" => "Hola, " . $nombreCompleto . ", Tu código de verificación es: *".$otp."* \n" . " En Moda Oxford S.A.S., valoramos profundamente la confianza que depositas en nosotros. Por eso queremos invitarte a autorizar el tratamiento de tus datos personales, conforme a nuestra política 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos Por seguridad, para autenticar tu identidad y completar la autorización, ingresa el código",
-            "wa_id" => $this->objOtp->getRecipient(), // número de destino con código de país
-            "from_id" => 10279 
-        ];
+    function enviarWSP($otp, $nombreCompleto)
+    {
+        $client = new Client();
 
         try {
-            // ... (código cURL para enviar SMS)
-            $client = new Client();
-
-            $response = $client->request('POST', 'https://api-ws.wasapi.io/api/v1/whatsapp-messages', [
+            // Consultar si el contacto existe
+            $response = $client->request('GET', 'https://api-ws.wasapi.io/api/v1/contacts/' . $this->objOtp->getRecipient(), [
                 'headers' => [
-                    'Accept' => 'application/json',
-                    'Authorization' => 'Bearer ' . $_ENV['WASAPI'],
-                    'Content-Type' => 'application/json',
+                    'accept' => 'application/json',
+                    'authorization' => 'Bearer ' . $_ENV['WASAPI'],
                 ],
-                'body' => json_encode($data)
+            ]);
+            // Si el contacto existe (HTTP 200)
+            if ($response->getStatusCode() === 200) {
+                // $data = [
+                //     "message" => "Hola, {$nombreCompleto}, tu código de verificación es: *{$otp}* \n" .
+                //         "En Moda Oxford S.A.S. valoramos tu confianza. Autoriza el tratamiento de tus datos personales aquí 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos",
+                //     "wa_id" => $this->objOtp->getRecipient(),
+                //     "from_id" => 10279
+                // ];
+                $data = [
+                    "contact_type" => "phone",
+                    "recipients" => $this->objOtp->getRecipient(),
+                    "template_id" => "db1ddaab-dc92-4294-9999-e961685c7952",
+                    "from_id" => 10279,
+                    "cta_var" => [
+                        [
+                            "text" => "{{2}}",  // variable del botón (CTA)
+                            "val"  => $otp      // valor dinámico del OTP
+                        ]
+                    ],
+                    "body_vars" => [
+                        [
+                            "text" => "{{1}}",  // variable 1 → nombre
+                            "val"  => $nombreCompleto
+                        ],
+                        [
+                            "text" => "{{2}}",  // variable 2 → código OTP
+                            "val"  => $otp
+                        ]
+                    ]
+                ];
+                try {
+                    $response = $client->request('POST', 'https://api-ws.wasapi.io/api/v1/whatsapp-messages/send-template', [
+                        'headers' => [
+                            'Accept' => 'application/json',
+                            'Authorization' => 'Bearer ' . $_ENV['WASAPI'],
+                            'Content-Type' => 'application/json',
+                        ],
+                        'body' => json_encode($data)
+                    ]);
+
+                    if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                        return [
+                            "success" => true,
+                            "action" => "enviar",
+                            "message" => "Mensaje enviado correctamente ✅",
+                            "response" => json_decode($response->getBody(), true)
+                        ];
+                    } else {
+                        return [
+                            "success" => false,
+                            "action" => "enviar",
+                            "message" => "Error al enviar mensaje ❌",
+                            "response" => json_decode($response->getBody(), true)
+                        ];
+                    }
+                } catch (RequestException $e) {
+                    return [
+                        "success" => false,
+                        "action" => "enviar",
+                        "message" => "Error enviando WhatsApp: " . $e->getMessage()
+                    ];
+                }
+            } else {
+                $this->crearContacto($client);
+                // $data = [
+                //     "message" => "Hola, {$nombreCompleto}, tu código de verificación es: *{$otp}* \n" .
+                //         "En Moda Oxford S.A.S. valoramos tu confianza. Autoriza el tratamiento de tus datos personales aquí 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos",
+                //     "wa_id" => $this->objOtp->getRecipient(),
+                //     "from_id" => 10279
+                // ];
+                $data = [
+                    "contact_type" => "phone",
+                    "recipients" => $this->objOtp->getRecipient(),
+                    "template_id" => "db1ddaab-dc92-4294-9999-e961685c7952",
+                    "from_id" => 10279,
+                    "cta_var" => [
+                        [
+                            "text" => "{{2}}",  // variable del botón (CTA)
+                            "val"  => $otp      // valor dinámico del OTP
+                        ]
+                    ],
+                    "body_vars" => [
+                        [
+                            "text" => "{{1}}",  // variable 1 → nombre
+                            "val"  => $nombreCompleto
+                        ],
+                        [
+                            "text" => "{{2}}",  // variable 2 → código OTP
+                            "val"  => $otp
+                        ]
+                    ]
+                ];
+                try {
+                    $response = $client->request('POST', 'https://api-ws.wasapi.io/api/v1/whatsapp-messages/send-template', [
+                        'headers' => [
+                            'Accept' => 'application/json',
+                            'Authorization' => 'Bearer ' . $_ENV['WASAPI'],
+                            'Content-Type' => 'application/json',
+                        ],
+                        'body' => json_encode($data)
+                    ]);
+
+                    if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                        return [
+                            "success" => true,
+                            "action" => "enviar",
+                            "message" => "Mensaje enviado correctamente ✅",
+                            "response" => json_decode($response->getBody(), true)
+                        ];
+                    } else {
+                        return [
+                            "success" => false,
+                            "action" => "enviar",
+                            "message" => "Error al enviar mensaje ❌",
+                            "response" => json_decode($response->getBody(), true)
+                        ];
+                    }
+                } catch (RequestException $e) {
+                    return [
+                        "success" => false,
+                        "action" => "enviar",
+                        "message" => "Error enviando WhatsApp: " . $e->getMessage()
+                    ];
+                }
+            }
+        } catch (RequestException $e) {
+            // Si el contacto no existe o hay otro error
+            $this->crearContacto($client);
+            // $data = [
+            //     "message" => "Hola, {$nombreCompleto}, tu código de verificación es: *{$otp}* \n" .
+            //         "En Moda Oxford S.A.S. valoramos tu confianza. Autoriza el tratamiento de tus datos personales aquí 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos",
+            //     "wa_id" => $this->objOtp->getRecipient(),
+            //     "from_id" => 10279
+            // ];
+            $data = [
+                "contact_type" => "phone",
+                "recipients" => $this->objOtp->getRecipient(),
+                "template_id" => "db1ddaab-dc92-4294-9999-e961685c7952",
+                "from_id" => 10279,
+                "cta_var" => [
+                    [
+                        "text" => "{{2}}",  // variable del botón (CTA)
+                        "val"  => $otp      // valor dinámico del OTP
+                    ]
+                ],
+                "body_vars" => [
+                    [
+                        "text" => "{{1}}",  // variable 1 → nombre
+                        "val"  => $nombreCompleto
+                    ],
+                    [
+                        "text" => "{{2}}",  // variable 2 → código OTP
+                        "val"  => $otp
+                    ]
+                ]
+            ];
+            try {
+                $response = $client->request('POST', 'https://api-ws.wasapi.io/api/v1/whatsapp-messages/send-template', [
+                    'headers' => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $_ENV['WASAPI'],
+                        'Content-Type' => 'application/json',
+                    ],
+                    'body' => json_encode($data)
+                ]);
+
+                if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
+                    return [
+                        "success" => true,
+                        "action" => "enviar",
+                        "message" => "Mensaje enviado correctamente ✅",
+                        "response" => json_decode($response->getBody(), true)
+                    ];
+                } else {
+                    return [
+                        "success" => false,
+                        "action" => "enviar",
+                        "message" => "Error al enviar mensaje ❌",
+                        "response" => json_decode($response->getBody(), true)
+                    ];
+                }
+            } catch (RequestException $e) {
+                return [
+                    "success" => false,
+                    "action" => "enviar",
+                    "message" => "Error enviando WhatsApp: " . $e->getMessage()
+                ];
+            }
+        }
+    }
+
+    private function crearContacto($client)
+    {
+        try {
+            $response = $client->request('POST', 'https://api-ws.wasapi.io/api/v1/contacts', [
+                'body' => json_encode([
+                    'first_name' => $_SESSION['cliente']['nombres'],
+                    'last_name'  => $_SESSION['cliente']['apellidos'],
+                    'email'      => $_SESSION['cliente']['email'] ?? '',
+                    'phone'      => $this->objOtp->getRecipient(),
+                    'notes'      => 'Contacto creado formulario registroClientes'
+                ]),
+                'headers' => [
+                    'accept' => 'application/json',
+                    'authorization' => 'Bearer ' . $_ENV['WASAPI'],
+                    'content-type' => 'application/json',
+                ],
             ]);
 
-    
-            $httpCode = $response->getStatusCode();
-            $responseBody = $response->getBody()->getContents();
-            $decoded = json_decode($responseBody, true);
-            if ($httpCode >= 200 && $httpCode < 300) {
-                return ["success" => true, "data" => $decoded];
+            if (in_array($response->getStatusCode(), [200, 201])) {
+                return [
+                    "success" => true,
+                    "action" => "crear",
+                    "message" => "Contacto creado correctamente ✅",
+                    "response" => json_decode($response->getBody(), true)
+                ];
             } else {
                 return [
                     "success" => false,
-                    "status" => $httpCode,
-                    "error" => $decoded['message'] ?? $response
+                    "action" => "crear",
+                    "message" => "Error al crear contacto ❌",
+                    "response" => json_decode($response->getBody(), true)
                 ];
             }
-
-        } catch (Exception $e) {
-            return ["success" => false, "message" => "Error enviando WSP: " . $e->getMessage()];
+        } catch (RequestException $e) {
+            return [
+                "success" => false,
+                "action" => "crear",
+                "message" => "Error al crear contacto: " . $e->getMessage()
+            ];
         }
     }
 
     /**
      * Envía un correo electrónico usando PHPMailer con la plantilla HTML.
      */
-    function enviarCorreo($destinatario, $otp, $nombreCompleto) {
+    function enviarCorreo($destinatario, $otp, $nombreCompleto)
+    {
         // Guion
-    $otpGuion = substr($otp, 0, 3) . '-' . substr($otp, 3, 3);   // 123-456
-        
+        $otpGuion = substr($otp, 0, 3) . '-' . substr($otp, 3, 3);   // 123-456
+
         // 1. Cargar la plantilla HTML
         $templatePath = BASE_PATH . '/template/email.html';
         if (!file_exists($templatePath)) {
-             return ["success" => false, "message" => "Error: La plantilla de correo no se encontró en: " . $templatePath];
+            return ["success" => false, "message" => "Error: La plantilla de correo no se encontró en: " . $templatePath];
         }
         $htmlBody = file_get_contents($templatePath);
 
@@ -151,14 +358,14 @@ class ControlOtp {
             "from" => "notificaciones@oxfordjeans.com",
             "fromName" => "Oxford Jeans",
             "to" => $destinatario,
-            "subject" => "Tu Código de Verificación: " . $otp, 
+            "subject" => "Tu Código de Verificación: " . $otp,
             "body" => $htmlBody, // Contenido HTML modificado
             "isHtml" => true,
         ];
 
         try {
             $mail = new PHPMailer(true);
-            
+
             // Configuración del servidor SMTP de Brevo
             $mail->isSMTP();
             $mail->Host = 'smtp-relay.brevo.com';
@@ -189,11 +396,12 @@ class ControlOtp {
         }
     }
 
-    
+
     /**
      * Genera un código OTP de 6 dígitos
      */
-    function generarOtp() {
+    function generarOtp()
+    {
         $otp = '';
         for ($i = 0; $i < 6; $i++) {
             $otp .= random_int(0, 9);
@@ -204,12 +412,13 @@ class ControlOtp {
     /**
      * Genera un OTP, lo setea en el mensaje y lo envía por SMS y Correo
      */
-    function enviarOtp() {
+    function enviarOtp()
+    {
         $otp = $this->generarOtp();
-        
+
         // Obtener nombre completo
         $nombreCompleto = $_SESSION['cliente']['nombres'] . ' ' . $_SESSION['cliente']['apellidos'];
-        
+
         // Mensaje para el SMS (aún necesario)
         $mensajeSMS = "Hola, $nombreCompleto, Tu código de verificación es: $otp \n" . " En Moda Oxford S.A.S., valoramos profundamente la confianza que depositas en nosotros. Por eso queremos invitarte a autorizar el tratamiento de tus datos personales, conforme a nuestra política 👉 https://www.oxfordjeans.com/terminos/tratamiento-de-datos Por seguridad, para autenticar tu identidad y completar la autorización, ingresa el código";
 
@@ -217,10 +426,10 @@ class ControlOtp {
         $this->objOtp->setContent($mensajeSMS);
         $this->objOtp->setOtp($otp);
         $medioEnvio = $_SESSION['cliente']['medioEnvio'];
-                // Enviar el SMS
+        // Enviar el SMS
         $resultadoSMS = $this->enviarSMS();
 
-        if ($medioEnvio === 'sms+email'){
+        if ($medioEnvio === 'sms+email') {
             // Enviar el correo - Ahora se pasa el nombre completo
             $resultadoCorreo = $this->enviarCorreo($_SESSION['cliente']['email'], $otp, $nombreCompleto);
             return [
@@ -230,8 +439,8 @@ class ControlOtp {
             ];
         }
 
-        if ($medioEnvio === 'sms+whatsapp'){
-            
+        if ($medioEnvio === 'sms+whatsapp') {
+
             $resultadoCorreo = $this->enviarWSP($otp, $nombreCompleto);
             return [
                 "otp" => $otp,
@@ -240,7 +449,7 @@ class ControlOtp {
             ];
         }
 
-        if ($medioEnvio === 'ambos'){
+        if ($medioEnvio === 'ambos') {
             $resultadoCorreo = $this->enviarCorreo($_SESSION['cliente']['email'], $otp, $nombreCompleto);
             $resultadoWSP = $this->enviarWSP($otp, $nombreCompleto);
             return [
@@ -257,30 +466,30 @@ class ControlOtp {
         ];
     }
 
-    function validarOtp(){
+    function validarOtp()
+    {
         $documento = $this->objCliente->getDocumento();
         $otp = $this->objOtp->getOtp();
 
         // Conexión a la base de datos
         $querySelect = new QuerySelect();
         $comandoSql = $querySelect->select("otp")
-                                  ->from("habeas_data")
-                                  ->where("id = '$documento' AND otp = '$otp' AND created_at >= NOW() - INTERVAL 2 MINUTE");
+            ->from("habeas_data")
+            ->where("id = '$documento' AND otp = '$otp' AND created_at >= NOW() - INTERVAL 2 MINUTE");
 
-        try{
+        try {
             $this->objControlConexion->abrirBd();
             $recordSet = $this->objControlConexion->ejecutarSelect($comandoSql);
 
-            
+
             if (mysqli_num_rows($recordSet) > 0) {
                 return ["success" => true, "message" => "Cliente registrado correctamente."];
-            }else{
+            } else {
                 return ["success" => false, "message" => "Código inválido."];
             }
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             throw new Exception("Error durante la conexión a la base de datos: " . $e->getMessage());
-        }finally{
+        } finally {
             $this->objControlConexion->cerrarBd();
         }
     }

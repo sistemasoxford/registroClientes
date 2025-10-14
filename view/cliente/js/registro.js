@@ -120,7 +120,7 @@ $(document).ready(function() {
         }
 
         const { value: canal } = await Swal.fire({
-            title: "¿Porque medio adicional deseas recibir tu codigo OTP?",
+            title: "¿Por cual medio adicional a SMS deseas recibir tu codigo OTP?",
             text: "Selecciona el medio de envío:",
             icon: "question",
             showCancelButton: true,

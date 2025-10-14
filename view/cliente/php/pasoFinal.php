@@ -36,7 +36,6 @@ try {
                 "message" => "Registro completado usuario"
             ]);
             exit;
-
         } else {
             // Caso 2: solo Tienda
             $resultado = $objControlCustomerUpdate->updateTienda(
@@ -51,20 +50,15 @@ try {
             echo json_encode([
                 "success" => $resultado,
                 "message" => "Registro completado tienda"
-                ]);
-             exit;
+            ]);
+            exit;
         }
-
-
-
-
     } else {
         echo json_encode([
             "success" => false,
             "message" => "Método no permitido."
         ]);
     }
-
 } catch (Exception $e) {
     echo json_encode([
         "success" => false,
